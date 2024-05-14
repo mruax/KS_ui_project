@@ -5,18 +5,35 @@ from pathlib import Path
 from settings import *
 
 
-# =========== Функции стартовой кнопки ==============
-def on_start(e):
+def on_start(e=None):
+    """
+    Изменение стартовой кнопки при наведении курсора мыши.
+
+    :param e: None
+    :return: None
+    """
     Button_start['image'] = b_start_dark
     # Button_start['fg'] = fg_b
 
 
-def off_start(e):
+def off_start(e=None):
+    """
+    Изменение стартовой кнопки при выходе курсора из зоны кнопки.
+
+    :param e: None
+    :return: None
+    """
     Button_start['image'] = b_start
     # Button_start['fg'] = fg_w
 
 
-def change_color_start(e):
+def change_color_start(e=None):
+    """
+    Изменяет стартовую кнопку при нажатии.
+
+    :param e: None
+    :return: None
+    """
     Button_start['image'] = b_start_light
 
 
@@ -30,17 +47,24 @@ def clearing_w_start():
         widget.destroy()
 
 
-def w_2(e):
+def window1():
+    """
+    Стартовое окно.
+
+    :param e:
+    :return: None
+    """
+    bg_start.place(x=0, y=0)
+    Button_start.place(x=130, y=600, width=243, height=54)
+
+
+def window2(e):
     """
     Второе окно.
 
     :param e:
     :return: None
     """
-
-    W.title("БРОНИРОВАНИЕ")
-    image_2 = PhotoImage(file='bg_2.png')
-    bg_2 = Label(W, image=image_2, borderwidth=0)
     bg_2.place(x=0, y=0)
 
 
@@ -59,17 +83,19 @@ if __name__ == "__main__":
     b_start_dark = PhotoImage(file=Path(button_start_dark))
     b_start_light = PhotoImage(file=Path(button_start_light))
 
-    bg_start = Label(W, image=image_start, borderwidth=0)
-    bg_start.place(x=0, y=0)
+    bg_start = Label(W, image=image_start, borderwidth=0)  # Фон через лейбл
 
-    # Создание кнопки с параметрами
     Button_start = Button(W, image=b_start, borderwidth=0,
                           text="ЗАБРОНИРОВАТЬ СТОЛ", compound="center", fg=fg_w, font=font1,
                           command=clearing_w_start)
-    Button_start.place(x=130, y=600, width=243, height=54)
-
     Button_start.bind('<Enter>', on_start)
     Button_start.bind('<Leave>', off_start)
     Button_start.bind('<Button-1>', change_color_start)
+
+    window1()  # Отображение элементов интерфейса первого окна
+
+    # ====================== Второе окно ======================
+    image_2 = PhotoImage(file=Path(solid_bg))
+    bg_2 = Label(W, image=image_2, borderwidth=0)
 
     W.mainloop()
