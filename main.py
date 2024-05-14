@@ -5,6 +5,18 @@ from pathlib import Path
 from settings import *
 
 
+def rgbtohex(r, g, b):
+    """
+    Возвращает строку формата RGB.
+
+    :param r: red
+    :param g: green
+    :param b: blue
+    :return: rgb format string
+    """
+    return f'#{r:02x}{g:02x}{b:02x}'
+
+
 def on_start(e=None):
     """
     Изменение стартовой кнопки при наведении курсора мыши.
@@ -66,10 +78,16 @@ def window2(e=None):
     """
     # clearing_w_start()
     background_label.place(x=0, y=0)
-    arrows_block.place(x=24, y=height-24-88)
+    arrows_block.place(x=24, y=height - 24 - 88)
+    date_label.place(x=24, y=124)
+    time_label.place(x=24, y=324)
 
 
 if __name__ == "__main__":
+    # Доп цвета
+    label_green_color = rgbtohex(r=109, g=191, b=102)
+    bg_color = rgbtohex(r=252, g=240, b=227)
+
     # ====================== Стартовое окно ======================
     W = Tk()
     W.geometry(f"{width}x{height}")
@@ -87,7 +105,7 @@ if __name__ == "__main__":
     bg_start = Label(W, image=image_start, borderwidth=0)  # Фон через лейбл
 
     Button_start = Button(W, image=b_start, borderwidth=0,
-                          text="ЗАБРОНИРОВАТЬ СТОЛ", compound="center", fg=fg_w, font=font1,
+                          text="ЗАБРОНИРОВАТЬ СТОЛ", compound="center", fg=fg_w, font=global_font,
                           command=window2)
     Button_start.bind('<Enter>', on_start)
     Button_start.bind('<Leave>', off_start)
@@ -99,6 +117,13 @@ if __name__ == "__main__":
 
     arrows_block_image = PhotoImage(file=Path(arrows_block_bg))
     arrows_block = Label(W, image=arrows_block_image, borderwidth=0)
+
+    date_label = Label(W, borderwidth=0, font=label_font, text="Выберите дату:",
+                       fg=label_green_color, bg=bg_color)
+    time_label = Label(W, borderwidth=0, font=label_font, text="Выберите время:",
+                       fg=label_green_color, bg=bg_color)
+
+    arrow_back_img = PhotoImage(file=Path(arrow_back))
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
