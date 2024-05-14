@@ -47,24 +47,24 @@ def clearing_w_start():
         widget.destroy()
 
 
-def window1():
+def window1(e=None):
     """
-    Стартовое окно.
+    Размещает элементы интерфейса стартового окна.
 
-    :param e:
     :return: None
     """
     bg_start.place(x=0, y=0)
     Button_start.place(x=130, y=600, width=243, height=54)
 
 
-def window2(e):
+def window2(e=None):
     """
-    Второе окно.
+    Размещает элементы интерфейса второго окна.
 
-    :param e:
+    :param e: None
     :return: None
     """
+    # clearing_w_start()
     bg_2.place(x=0, y=0)
 
 
@@ -87,15 +87,16 @@ if __name__ == "__main__":
 
     Button_start = Button(W, image=b_start, borderwidth=0,
                           text="ЗАБРОНИРОВАТЬ СТОЛ", compound="center", fg=fg_w, font=font1,
-                          command=clearing_w_start)
+                          command=window2)
     Button_start.bind('<Enter>', on_start)
     Button_start.bind('<Leave>', off_start)
     Button_start.bind('<Button-1>', change_color_start)
 
-    window1()  # Отображение элементов интерфейса первого окна
-
     # ====================== Второе окно ======================
     image_2 = PhotoImage(file=Path(solid_bg))
     bg_2 = Label(W, image=image_2, borderwidth=0)
+
+    # ====================== Вызовы окон ======================
+    window1()  # Отображение элементов интерфейса первого окна
 
     W.mainloop()
