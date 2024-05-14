@@ -65,13 +65,14 @@ def window2(e=None):
     :return: None
     """
     # clearing_w_start()
-    bg_2.place(x=0, y=0)
+    background_label.place(x=0, y=0)
+    arrows_block.place(x=24, y=height-24-88)
 
 
 if __name__ == "__main__":
     # ====================== Стартовое окно ======================
     W = Tk()
-    W.geometry("502x932")
+    W.geometry(f"{width}x{height}")
     W.title("Ресторан \"Хмели-сунели\"")
     W.resizable(False, False)
     W.iconbitmap(Path(window_logo))
@@ -93,8 +94,11 @@ if __name__ == "__main__":
     Button_start.bind('<Button-1>', change_color_start)
 
     # ====================== Второе окно ======================
-    image_2 = PhotoImage(file=Path(solid_bg))
-    bg_2 = Label(W, image=image_2, borderwidth=0)
+    solid_background = PhotoImage(file=Path(solid_bg))
+    background_label = Label(W, image=solid_background, borderwidth=0)
+
+    arrows_block_image = PhotoImage(file=Path(arrows_block_bg))
+    arrows_block = Label(W, image=arrows_block_image, borderwidth=0)
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
