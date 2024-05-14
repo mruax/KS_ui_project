@@ -16,6 +16,11 @@ button_start = "src\\general\\b_start.png"
 button_start_light = "src\\general\\b_start_light.png"
 button_start_dark = "src\\general\\b_start_dark.png"
 arrow_back = "src\\general\\back.png"
+arrow_back_dark = "src\\general\\back_dark.png"
+arrow_back_light = "src\\general\\back_light.png"
+arrow_forward = "src\\general\\forward.png"
+arrow_forward_dark = "src\\general\\forward_dark.png"
+arrow_forward_light = "src\\general\\forward_light.png"
 
 # Второе окно
 arrows_block_bg = "src\\win2\\bg_arrows.png"
