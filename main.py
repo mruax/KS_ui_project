@@ -5,7 +5,7 @@ from pathlib import Path
 from settings import *
 
 
-# Функции для изменения вида кнопки
+# =========== Функции стартовой кнопки ==============
 def on_start(e):
     Button_start['image'] = b_start_dark
     # Button_start['fg'] = fg_b
@@ -48,8 +48,9 @@ if __name__ == "__main__":
     # ====================== Стартовое окно ======================
     W = Tk()
     W.geometry("502x932")
-    W.title("ХМЕЛИ СУНЕЛИ")
+    W.title("Ресторан \"Хмели-сунели\"")
     W.resizable(False, False)
+    W.iconbitmap(Path(window_logo))
 
     image_start = PhotoImage(file=Path(bg_with_logo))  # Стартовый фон
 

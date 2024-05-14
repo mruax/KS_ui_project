@@ -1,3 +1,6 @@
+# Окно
+window_logo = "src\\logo.ico"
+
 # Заготовки для шрифтов и цветов
 font1 = ("Aptos", "12")
 fg_w = "white"
