@@ -1,4 +1,7 @@
 from tkinter import *
+from pathlib import Path
+
+from settings import *
 
 
 # Функции для изменения вида кнопки
@@ -31,30 +34,25 @@ def w_2(e):
     bg_2.place(x=0, y=0)
 
 
-
 if __name__ == "__main__":
-    # Заготовки для шрифтов и цветов
-    font1 = ('Aptos', '14')
-    fg_w = 'white'
-    fg_b = 'black'
-
-    # Стартовое окно
-    # Создание окна (параметры + фон)
+    # ====================== Стартовое окно ======================
     W = Tk()
     W.geometry("502x932")
     W.title("ХМЕЛИ СУНЕЛИ")
     W.resizable(False, False)
-    image_start = PhotoImage(file='bg_start.png')
+
+    image_start = PhotoImage(file=Path(bg_with_logo))
     bg_start = Label(W, image=image_start, borderwidth=0)
     bg_start.place(x=0, y=0)
 
     # Кнопка на стартовом окне
     # Изображения для разных фаз кнопки
-    b_start = PhotoImage(file='b_start.png')
-    b_start_light = PhotoImage(file='b_start_light.png')
+    b_start = PhotoImage(file=Path(button_start))
+    b_start_light = PhotoImage(file=Path(button_start_light))
+
     # Создание кнопки (параметры)
     Button_start = Button(W, image=b_start, borderwidth=0,
-                          text="ЗАБРОНИРОВАТЬ", compound="center", fg=fg_w, font=font1,
+                          text="ЗАБРОНИРОВАТЬ СТОЛ", compound="center", fg=fg_w, font=font1,
                           command=clearing_w_start)
     Button_start.place(x=130, y=600, width=243, height=54)
 
