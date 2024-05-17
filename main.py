@@ -12,71 +12,68 @@ def rgbtohex(r, g, b):
     :param r: red
     :param g: green
     :param b: blue
-    :return: rgb format string
+    :return: rgb format string - #******
     """
     return f'#{r:02x}{g:02x}{b:02x}'
 
 
-def on_start(e=None):
-    """
-    Изменение стартовой кнопки при наведении курсора мыши.
-
-    :param e: None
-    :return: None
-    """
+# ======================== Кнопка начала ========================
+def on_start(event=None):
     Button_start['image'] = b_start_dark
-    # Button_start['fg'] = fg_b
 
 
-def off_start(e=None):
-    """
-    Изменение стартовой кнопки при выходе курсора из зоны кнопки.
-
-    :param e: None
-    :return: None
-    """
+def off_start(event=None):
     Button_start['image'] = b_start
-    # Button_start['fg'] = fg_w
 
 
-def change_color_start(e=None):
-    """
-    Изменяет стартовую кнопку при нажатии.
-
-    :param e: None
-    :return: None
-    """
+def change_color_start(event=None):
     Button_start['image'] = b_start_light
+# ===============================================================
 
 
-def on_forward(e=None):
-    """
-    Изменение кнопки "вперед" при наведении курсора мыши.
-
-    :param e: None
-    :return: None
-    """
+# ======================== Кнопка вперед ========================
+def on_forward(event=None):
     forward_button['image'] = arrow_forward_dark_img
 
 
-def off_forward(e=None):
-    """
-    Изменение кнопки "вперед" при наведении курсора мыши.
-
-    :param e: None
-    :return: None
-    """
+def off_forward(event=None):
     forward_button['image'] = arrow_forward_img
 
 
-def change_color_forward(e=None):
-    """
-    Изменяет стартовую кнопку при нажатии.
-
-    :param e: None
-    :return: None
-    """
+def change_color_forward(event=None):
     forward_button['image'] = arrow_forward_light_img
+# ===============================================================
+
+
+# ======================== Кнопка назад =========================
+def on_back(event=None):
+    back_button['image'] = arrow_back_dark_img
+
+
+def off_back(event=None):
+    back_button['image'] = arrow_back_img
+
+
+def change_color_back(event=None):
+    back_button['image'] = arrow_back_light_img
+# ===============================================================
+
+
+# ========================= Кнопки дат ==========================
+def date_btn_on(event, button):
+    button["image"] = date_btn_img_dark
+    button["foreground"] = fg_w
+
+
+def date_btn_off(event, button):
+    button["image"] = date_btn_img
+    button["foreground"] = fg_w
+
+
+def date_btn_clicked(event, button):
+    button["image"] = date_btn_img_light
+    button["foreground"] = fg_b
+# ===============================================================
 
 
 def clearing_w_start():
@@ -107,10 +104,11 @@ def next_win():
     print(321)
 
 
-def window1(e=None):
+def window1(event=None):
     """
-    Размещает элементы интерфейса стартового окна.
+    Размещает элементы интерфейса n-нного окна.
 
+    :param e: None
     :return: None
     """
     global window_number
@@ -119,33 +117,53 @@ def window1(e=None):
     Button_start.place(x=130, y=600, width=243, height=54)
 
 
-def window2(e=None):
+def additional_elements(event=None):
     """
-    Размещает элементы интерфейса второго окна.
+    Одинаковые элементы окон - стрелки, фон и тп.
 
     :param e: None
     :return: None
     """
-    # clearing_w_start()
-    global window_number
-    window_number = 2
     background_label.place(x=0, y=0)
-
-    date_label.place(x=24, y=124)
-    time_label.place(x=24, y=324)
 
     arrows_block.place(x=24, y=height - 24 - 88)
     back_button.place(x=24 + 138, y=height - 12 - 79)
     forward_button.place(x=24 + 138 + 79 + 20, y=height - 12 - 79)
 
 
-if __name__ == "__main__":
-    # Номер окна
-    window_number = 1
+def window2(event=None):
+    global window_number
+    window_number = 2
+    additional_elements()
 
-    # Доп цвета
-    label_green_color = rgbtohex(r=109, g=191, b=102)
-    bg_color = rgbtohex(r=252, g=240, b=227)
+    date_label.place(x=24, y=124)
+
+    date_button1.place(x=24, y=124 + 36 + 24)
+    date_button2.place(x=24 + 104 + 24, y=124 + 36 + 24)
+    date_button3.place(x=24 + 104 + 24 + 104 + 24, y=124 + 36 + 24)
+    date_button4.place(x=24, y=124 + 36 + 24 + 48 + 24)
+    date_button5.place(x=24 + 104 + 24, y=124 + 36 + 24 + 48 + 24)
+
+
+def window3(event=None):
+    global window_number
+    window_number = 3
+    additional_elements()
+
+    date_label.place(x=24, y=124)
+    time_label.place(x=24, y=324)
+
+
+if __name__ == "__main__":
+    # ===================== Логика и параметры ===================
+    window_number = 1  # Номер окна
+
+    # Кнопки для дат:
+    activated_date_button = False  # Либо номер кнопки 1-5, либо никакая - False
+
+    # Доп цвета:
+    label_green_color = rgbtohex(r=109, g=191, b=102)  # светло-зеленый
+    bg_peach_color = rgbtohex(r=252, g=240, b=227)  # персиковый
 
     # ====================== Стартовое окно ======================
     W = Tk()
@@ -165,7 +183,7 @@ if __name__ == "__main__":
 
     Button_start = Button(W, image=b_start, borderwidth=0,
                           text="ЗАБРОНИРОВАТЬ СТОЛ", compound="center",
-                          fg=fg_w, font=global_font,
+                          fg=fg_w, font=global_font, activebackground=bg_peach_color,
                           command=window2)
     Button_start.bind('<Enter>', on_start)
     Button_start.bind('<Leave>', off_start)
@@ -175,30 +193,74 @@ if __name__ == "__main__":
     solid_background = PhotoImage(file=Path(solid_bg))
     background_label = Label(W, image=solid_background, borderwidth=0)
 
+    # Стрелочки:
     arrows_block_image = PhotoImage(file=Path(arrows_block_bg))
     arrows_block = Label(W, image=arrows_block_image, borderwidth=0)
-
-    date_label = Label(W, borderwidth=0, font=label_font, text="Выберите дату:",
-                       fg=label_green_color, bg=bg_color)
-    time_label = Label(W, borderwidth=0, font=label_font, text="Выберите время:",
-                       fg=label_green_color, bg=bg_color)
 
     arrow_back_img = PhotoImage(file=Path(arrow_back))
     arrow_back_dark_img = PhotoImage(file=Path(arrow_back_dark))
     arrow_back_light_img = PhotoImage(file=Path(arrow_back_light))
 
     back_button = Button(W, image=arrow_back_img, borderwidth=0,
-                         compound="center", command=back_win, bg=bg_w)
+                         compound="center", command=back_win, bg=bg_w, activebackground=bg_w)
+    back_button.bind('<Enter>', on_back)
+    back_button.bind('<Leave>', off_back)
+    back_button.bind('<Button-1>', change_color_back)
 
     arrow_forward_img = PhotoImage(file=Path(arrow_forward))
     arrow_forward_dark_img = PhotoImage(file=Path(arrow_forward_dark))
     arrow_forward_light_img = PhotoImage(file=Path(arrow_forward_light))
 
     forward_button = Button(W, image=arrow_forward_img, borderwidth=0,
-                            compound="center", command=next_win, bg=bg_w)
+                            compound="center", command=next_win, bg=bg_w, activebackground=bg_w)
     forward_button.bind('<Enter>', on_forward)
     forward_button.bind('<Leave>', off_forward)
     forward_button.bind('<Button-1>', change_color_forward)
+
+    # Даты:
+    date_label = Label(W, borderwidth=0, font=label_font, text="Выберите дату:",
+                       fg=label_green_color, bg=bg_peach_color)
+
+    date_btn_img = PhotoImage(file=Path(date_button))
+    date_btn_img_light = PhotoImage(file=Path(date_button_light))
+    date_btn_img_dark = PhotoImage(file=Path(date_button_dark))
+    date_btn_img_on = PhotoImage(file=Path(date_button_on))
+
+    date_button1 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="29 мая", font=global_font, foreground=fg_w)
+    date_button2 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="31 мая", font=global_font, foreground=fg_w)
+    date_button3 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="1 июня", font=global_font, foreground=fg_w)
+    date_button4 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="7 июня", font=global_font, foreground=fg_w)
+    date_button5 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="10 июня", font=global_font, foreground=fg_w)
+
+    date_button1.bind('<Enter>', lambda event: date_btn_on(event, date_button1))
+    date_button1.bind('<Leave>', lambda event: date_btn_off(event, date_button1))
+    date_button1.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button1))
+    date_button2.bind('<Enter>', lambda event: date_btn_on(event, date_button2))
+    date_button2.bind('<Leave>', lambda event: date_btn_off(event, date_button2))
+    date_button2.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button2))
+    date_button3.bind('<Enter>', lambda event: date_btn_on(event, date_button3))
+    date_button3.bind('<Leave>', lambda event: date_btn_off(event, date_button3))
+    date_button3.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button3))
+    date_button4.bind('<Enter>', lambda event: date_btn_on(event, date_button4))
+    date_button4.bind('<Leave>', lambda event: date_btn_off(event, date_button4))
+    date_button4.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button4))
+    date_button5.bind('<Enter>', lambda event: date_btn_on(event, date_button5))
+    date_button5.bind('<Leave>', lambda event: date_btn_off(event, date_button5))
+    date_button5.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button5))
+
+    # Время:
+    time_label = Label(W, borderwidth=0, font=label_font, text="Выберите время:",
+                       fg=label_green_color, bg=bg_peach_color)
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна

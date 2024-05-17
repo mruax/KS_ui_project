@@ -16,6 +16,7 @@ bg_with_logo = "src\\general\\bg_start.png"
 button_start = "src\\general\\b_start.png"
 button_start_light = "src\\general\\b_start_light.png"
 button_start_dark = "src\\general\\b_start_dark.png"
+arrows_block_bg = "src\\general\\bg_arrows.png"
 arrow_back = "src\\general\\back.png"
 arrow_back_dark = "src\\general\\back_dark.png"
 arrow_back_light = "src\\general\\back_light.png"
@@ -24,4 +25,7 @@ arrow_forward_dark = "src\\general\\forward_dark.png"
 arrow_forward_light = "src\\general\\forward_light.png"
 
 # Второе окно
-arrows_block_bg = "src\\win2\\bg_arrows.png"
+date_button = "src\\win2\\b_2.png"
+date_button_dark = "src\\win2\\b_2_dark.png"
+date_button_light = "src\\win2\\b_2_light.png"
+date_button_on = "src\\win2\\b_2_border.png"  # rename file border -> on
