@@ -83,7 +83,7 @@ def clearing_w_start():
     :return: None
     """
     for widget in W.winfo_children():
-        widget.destroy()
+        widget.place_forget()
 
 
 def back_win():
@@ -92,7 +92,12 @@ def back_win():
 
     :return: None
     """
-    print(123)
+    global window_number
+    # if window_number == 2:
+    #     clearing_w_start()
+    #     window1()
+    if window_number == 5:
+        pass
 
 
 def next_win():
@@ -101,7 +106,11 @@ def next_win():
 
     :return: None
     """
-    print(321)
+    try:
+        function = globals().get(f"window{window_number+1}")
+        function()
+    except Exception as e:
+        pass
 
 
 def window1(event=None):
@@ -148,11 +157,40 @@ def window2(event=None):
 def window3(event=None):
     global window_number
     window_number = 3
-    additional_elements()
 
-    date_label.place(x=24, y=124)
-    time_label.place(x=24, y=324)
+    time_label.place(x=24, y=124 + 36 + 24 + 48 + 24 + 32 + 48)
 
+    time_button1.place(x=24,
+                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24)
+    time_button2.place(x=24 + 104 + 24,
+                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24)
+    time_button3.place(x=24 + 104 + 24 + 104 + 24,
+                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24)
+    time_button4.place(x=24,
+                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24)
+    time_button5.place(x=24 + 104 + 24,
+                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24)
+    time_button6.place(x=24 + 104 + 24 + 104 + 24,
+                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24)
+    time_button7.place(x=24,
+                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24)
+    time_button8.place(x=24 + 104 + 24,
+                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24)
+    time_button9.place(x=24 + 104 + 24 + 104 + 24,
+                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24)
+    time_button10.place(x=24,
+                        y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24 + 48 + 24)
+    time_button11.place(x=24 + 104 + 24,
+                        y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24 + 48 + 24)
+    time_button12.place(x=24 + 104 + 24 + 104 + 24,
+                        y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24 + 48 + 24)
+
+
+def window4(event=None):
+    global window_number
+    window_number = 4
+
+    
 
 if __name__ == "__main__":
     # ===================== Логика и параметры ===================
@@ -261,6 +299,80 @@ if __name__ == "__main__":
     # Время:
     time_label = Label(W, borderwidth=0, font=label_font, text="Выберите время:",
                        fg=label_green_color, bg=bg_peach_color)
+
+    time_button1 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="16:00", font=global_font, foreground=fg_w)
+    time_button2 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="17:00", font=global_font, foreground=fg_w)
+    time_button3 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="18:00", font=global_font, foreground=fg_w)
+    time_button4 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="18:30", font=global_font, foreground=fg_w)
+    time_button5 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="19:00", font=global_font, foreground=fg_w)
+    time_button6 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="20:00", font=global_font, foreground=fg_w)
+    time_button7 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="20:30", font=global_font, foreground=fg_w)
+    time_button8 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="21:00", font=global_font, foreground=fg_w)
+    time_button9 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                          text="21:30", font=global_font, foreground=fg_w)
+    time_button10 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                           compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                           text="22:00", font=global_font, foreground=fg_w)
+    time_button11 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                           compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                           text="22:30", font=global_font, foreground=fg_w)
+    time_button12 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
+                           compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
+                           text="23:00", font=global_font, foreground=fg_w)
+
+    time_button1.bind('<Enter>', lambda event: date_btn_on(event, time_button1))
+    time_button1.bind('<Leave>', lambda event: date_btn_off(event, time_button1))
+    time_button1.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button1))
+    time_button2.bind('<Enter>', lambda event: date_btn_on(event, time_button2))
+    time_button2.bind('<Leave>', lambda event: date_btn_off(event, time_button2))
+    time_button2.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button2))
+    time_button3.bind('<Enter>', lambda event: date_btn_on(event, time_button3))
+    time_button3.bind('<Leave>', lambda event: date_btn_off(event, time_button3))
+    time_button3.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button3))
+    time_button4.bind('<Enter>', lambda event: date_btn_on(event, time_button4))
+    time_button4.bind('<Leave>', lambda event: date_btn_off(event, time_button4))
+    time_button4.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button4))
+    time_button5.bind('<Enter>', lambda event: date_btn_on(event, time_button5))
+    time_button5.bind('<Leave>', lambda event: date_btn_off(event, time_button5))
+    time_button5.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button5))
+    time_button6.bind('<Enter>', lambda event: date_btn_on(event, time_button6))
+    time_button6.bind('<Leave>', lambda event: date_btn_off(event, time_button6))
+    time_button6.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button6))
+    time_button7.bind('<Enter>', lambda event: date_btn_on(event, time_button7))
+    time_button7.bind('<Leave>', lambda event: date_btn_off(event, time_button7))
+    time_button7.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button7))
+    time_button8.bind('<Enter>', lambda event: date_btn_on(event, time_button8))
+    time_button8.bind('<Leave>', lambda event: date_btn_off(event, time_button8))
+    time_button8.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button8))
+    time_button9.bind('<Enter>', lambda event: date_btn_on(event, time_button9))
+    time_button9.bind('<Leave>', lambda event: date_btn_off(event, time_button9))
+    time_button9.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button9))
+    time_button10.bind('<Enter>', lambda event: date_btn_on(event, time_button10))
+    time_button10.bind('<Leave>', lambda event: date_btn_off(event, time_button10))
+    time_button10.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button10))
+    time_button11.bind('<Enter>', lambda event: date_btn_on(event, time_button11))
+    time_button11.bind('<Leave>', lambda event: date_btn_off(event, time_button11))
+    time_button11.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button11))
+    time_button12.bind('<Enter>', lambda event: date_btn_on(event, time_button12))
+    time_button12.bind('<Leave>', lambda event: date_btn_off(event, time_button12))
+    time_button12.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button12))
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
