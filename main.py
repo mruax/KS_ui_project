@@ -123,7 +123,8 @@ def back_win():
     #     clearing_w_start()
     #     window1()
     if window_number == 5:
-        pass
+        clearing_w_start()
+        window2()
 
 
 def next_win():
@@ -221,6 +222,15 @@ def window4(event=None):
 
     minus_button.place(x=24 + 4, y=612 + 32 + 48 + 24 + 38 + 4)
     plus_button.place(x=24 + 214 - 28 - 4, y=612 + 32 + 48 + 24 + 38 + 4)
+
+
+def window5(event=None):
+    global window_number
+    window_number = 5
+    clearing_w_start()
+    additional_elements()
+
+    ...
 
 
 if __name__ == "__main__":
@@ -432,6 +442,11 @@ if __name__ == "__main__":
     plus_button.bind('<Enter>', plus_btn_on)
     plus_button.bind('<Leave>', plus_btn_off)
     plus_button.bind('<Button-1>', plus_btn_clicked)
+
+    # ====================== Третье окно ======================
+    menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
+                       fg=label_green_color, bg=bg_peach_color)
+
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
