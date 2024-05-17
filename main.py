@@ -76,6 +76,32 @@ def date_btn_clicked(event, button):
 # ===============================================================
 
 
+# ======================== Кнопки + и - =========================
+def minus_btn_on(event):
+    minus_button['image'] = minus_dark_img
+
+
+def minus_btn_off(event):
+    minus_button['image'] = minus_img
+
+
+def minus_btn_clicked(event):
+    minus_button['image'] = minus_light_img
+
+
+def plus_btn_on(event):
+    plus_button['image'] = plus_dark_img
+
+
+def plus_btn_off(event):
+    plus_button['image'] = plus_img
+
+
+def plus_btn_clicked(event):
+    plus_button['image'] = plus_light_img
+# ===============================================================
+
+
 def clearing_w_start():
     """
     Удаление всех виджетов из окна.
@@ -136,8 +162,8 @@ def additional_elements(event=None):
     background_label.place(x=0, y=0)
 
     arrows_block.place(x=24, y=height - 24 - 88)
-    back_button.place(x=24 + 138, y=height - 12 - 79)
-    forward_button.place(x=24 + 138 + 79 + 20, y=height - 12 - 79)
+    back_button.place(x=24 + 48, y=height - 24 - 24 - 48)
+    forward_button.place(x=24 + 48 + 100 + 20, y=height - 24 - 24 - 48)
 
 
 def window2(event=None):
@@ -158,39 +184,44 @@ def window3(event=None):
     global window_number
     window_number = 3
 
-    time_label.place(x=24, y=124 + 36 + 24 + 48 + 24 + 32 + 48)
+    time_label.place(x=24, y=124 + 36 + 24 + 48 + 24 + 32 + 48)  # 336
 
     time_button1.place(x=24,
-                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24)
+                       y=336 + 36 + 24)
     time_button2.place(x=24 + 104 + 24,
-                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24)
+                       y=336 + 36 + 24)
     time_button3.place(x=24 + 104 + 24 + 104 + 24,
-                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24)
+                       y=336 + 36 + 24)
     time_button4.place(x=24,
-                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24)
+                       y=336 + 36 + 24 + 48 + 24)
     time_button5.place(x=24 + 104 + 24,
-                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24)
+                       y=336 + 36 + 24 + 48 + 24)
     time_button6.place(x=24 + 104 + 24 + 104 + 24,
-                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24)
+                       y=336 + 36 + 24 + 48 + 24)
     time_button7.place(x=24,
-                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24)
+                       y=336 + 36 + 24 + 48 + 24 + 48 + 24)
     time_button8.place(x=24 + 104 + 24,
-                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24)
+                       y=336 + 36 + 24 + 48 + 24 + 48 + 24)
     time_button9.place(x=24 + 104 + 24 + 104 + 24,
-                       y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24)
+                       y=336 + 36 + 24 + 48 + 24 + 48 + 24)
     time_button10.place(x=24,
-                        y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24 + 48 + 24)
+                        y=336 + 36 + 24 + 48 + 24 + 48 + 24 + 48 + 24)
     time_button11.place(x=24 + 104 + 24,
-                        y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24 + 48 + 24)
+                        y=336 + 36 + 24 + 48 + 24 + 48 + 24 + 48 + 24)
     time_button12.place(x=24 + 104 + 24 + 104 + 24,
-                        y=124 + 36 + 24 + 48 + 24 + 32 + 48 + 36 + 24 + 48 + 24 + 48 + 24 + 48 + 24)
+                        y=336 + 36 + 24 + 48 + 24 + 48 + 24 + 48 + 24)
 
 
 def window4(event=None):
     global window_number
     window_number = 4
 
-    
+    people_label.place(x=24, y=612 + 32 + 48)
+    counter_block.place(x=24, y=612 + 32 + 48 + 24 + 38)
+
+    minus_button.place(x=24 + 4, y=612 + 32 + 48 + 24 + 38 + 4)
+    plus_button.place(x=24 + 214 - 28 - 4, y=612 + 32 + 48 + 24 + 38 + 4)
+
 
 if __name__ == "__main__":
     # ===================== Логика и параметры ===================
@@ -250,13 +281,14 @@ if __name__ == "__main__":
     arrow_forward_light_img = PhotoImage(file=Path(arrow_forward_light))
 
     forward_button = Button(W, image=arrow_forward_img, borderwidth=0,
+                            text="ДАЛЕЕ", font=global_font, foreground=fg_w,
                             compound="center", command=next_win, bg=bg_w, activebackground=bg_w)
     forward_button.bind('<Enter>', on_forward)
     forward_button.bind('<Leave>', off_forward)
     forward_button.bind('<Button-1>', change_color_forward)
 
     # Даты:
-    date_label = Label(W, borderwidth=0, font=label_font, text="Выберите дату:",
+    date_label = Label(W, borderwidth=0, font=label_font, text="Выберите дату",
                        fg=label_green_color, bg=bg_peach_color)
 
     date_btn_img = PhotoImage(file=Path(date_button))
@@ -297,7 +329,7 @@ if __name__ == "__main__":
     date_button5.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button5))
 
     # Время:
-    time_label = Label(W, borderwidth=0, font=label_font, text="Выберите время:",
+    time_label = Label(W, borderwidth=0, font=label_font, text="Выберите время",
                        fg=label_green_color, bg=bg_peach_color)
 
     time_button1 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
@@ -373,6 +405,33 @@ if __name__ == "__main__":
     time_button12.bind('<Enter>', lambda event: date_btn_on(event, time_button12))
     time_button12.bind('<Leave>', lambda event: date_btn_off(event, time_button12))
     time_button12.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button12))
+
+    # Количество человек:
+    people_label = Label(W, borderwidth=0, font=label_font, text="Выберите время",
+                         fg=label_green_color, bg=bg_peach_color)
+
+    counter_img_bg = PhotoImage(file=Path(counter_bg))
+    counter_block = Label(W, image=counter_img_bg, borderwidth=0, compound="center", bg=bg_peach_color,
+                          text="1", foreground=fg_b, font=global_font)
+
+    minus_img = PhotoImage(file=Path(minus_normal))
+    minus_light_img = PhotoImage(file=Path(minus_light))
+    minus_dark_img = PhotoImage(file=Path(minus_dark))
+    plus_img = PhotoImage(file=Path(plus_normal))
+    plus_light_img = PhotoImage(file=Path(plus_light))
+    plus_dark_img = PhotoImage(file=Path(plus_dark))
+
+    minus_button = Button(W, image=minus_img, borderwidth=0,  # , command=next_win
+                          compound="center", bg=fg_w, activebackground=fg_w)
+    plus_button = Button(W, image=plus_img, borderwidth=0,  # , command=next_win
+                         compound="center", bg=fg_w, activebackground=fg_w)
+
+    minus_button.bind('<Enter>', minus_btn_on)
+    minus_button.bind('<Leave>', minus_btn_off)
+    minus_button.bind('<Button-1>', minus_btn_clicked)
+    plus_button.bind('<Enter>', plus_btn_on)
+    plus_button.bind('<Leave>', plus_btn_off)
+    plus_button.bind('<Button-1>', plus_btn_clicked)
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
