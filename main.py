@@ -136,8 +136,8 @@ def additional_elements(event=None):
     background_label.place(x=0, y=0)
 
     arrows_block.place(x=24, y=height - 24 - 88)
-    back_button.place(x=24 + 138, y=height - 12 - 79)
-    forward_button.place(x=24 + 138 + 79 + 20, y=height - 12 - 79)
+    back_button.place(x=24 + 48, y=height - 24 - 24 - 48)
+    forward_button.place(x=24 + 48 + 100 + 20, y=height - 24 - 24 - 48)
 
 
 def window2(event=None):
@@ -190,7 +190,7 @@ def window4(event=None):
     global window_number
     window_number = 4
 
-    
+
 
 if __name__ == "__main__":
     # ===================== Логика и параметры ===================
@@ -250,6 +250,7 @@ if __name__ == "__main__":
     arrow_forward_light_img = PhotoImage(file=Path(arrow_forward_light))
 
     forward_button = Button(W, image=arrow_forward_img, borderwidth=0,
+                            text="ДАЛЕЕ", font=global_font, foreground=fg_w,
                             compound="center", command=next_win, bg=bg_w, activebackground=bg_w)
     forward_button.bind('<Enter>', on_forward)
     forward_button.bind('<Leave>', off_forward)
