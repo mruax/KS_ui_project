@@ -56,7 +56,27 @@ def on_forward(e=None):
     :param e: None
     :return: None
     """
-    Button_start['image'] = arrow_forward_dark
+    forward_button['image'] = arrow_forward_dark_img
+
+
+def off_forward(e=None):
+    """
+    Изменение кнопки "вперед" при наведении курсора мыши.
+
+    :param e: None
+    :return: None
+    """
+    forward_button['image'] = arrow_forward_img
+
+
+def change_color_forward(e=None):
+    """
+    Изменяет стартовую кнопку при нажатии.
+
+    :param e: None
+    :return: None
+    """
+    forward_button['image'] = arrow_forward_light_img
 
 
 def clearing_w_start():
@@ -177,6 +197,8 @@ if __name__ == "__main__":
     forward_button = Button(W, image=arrow_forward_img, borderwidth=0,
                             compound="center", command=next_win, bg=bg_w)
     forward_button.bind('<Enter>', on_forward)
+    forward_button.bind('<Leave>', off_forward)
+    forward_button.bind('<Button-1>', change_color_forward)
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
