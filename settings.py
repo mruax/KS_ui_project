@@ -8,6 +8,7 @@ global_font = ("Aptos", "12", "bold")
 label_font = ("Aptos", "20", "bold")
 fg_w = "white"
 fg_b = "black"
+bg_w = "white"
 
 # Изображения
 solid_bg = "src\\general\\bg_2.png"

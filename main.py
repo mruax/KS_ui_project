@@ -49,6 +49,16 @@ def change_color_start(e=None):
     Button_start['image'] = b_start_light
 
 
+def on_forward(e=None):
+    """
+    Изменение кнопки "вперед" при наведении курсора мыши.
+
+    :param e: None
+    :return: None
+    """
+    Button_start['image'] = arrow_forward_dark
+
+
 def clearing_w_start():
     """
     Удаление всех виджетов из окна.
@@ -158,14 +168,15 @@ if __name__ == "__main__":
     arrow_back_light_img = PhotoImage(file=Path(arrow_back_light))
 
     back_button = Button(W, image=arrow_back_img, borderwidth=0,
-                         compound="center", command=back_win)
+                         compound="center", command=back_win, bg=bg_w)
 
     arrow_forward_img = PhotoImage(file=Path(arrow_forward))
     arrow_forward_dark_img = PhotoImage(file=Path(arrow_forward_dark))
     arrow_forward_light_img = PhotoImage(file=Path(arrow_forward_light))
 
     forward_button = Button(W, image=arrow_forward_img, borderwidth=0,
-                            compound="center", command=next_win)
+                            compound="center", command=next_win, bg=bg_w)
+    forward_button.bind('<Enter>', on_forward)
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
