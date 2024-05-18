@@ -34,14 +34,17 @@ def change_color_start(event=None):
 # ======================== Кнопка вперед ========================
 def on_forward(event=None):
     forward_button['image'] = arrow_forward_dark_img
+    forward_button['foreground'] = fg_w
 
 
 def off_forward(event=None):
     forward_button['image'] = arrow_forward_img
+    forward_button['foreground'] = fg_w
 
 
 def change_color_forward(event=None):
     forward_button['image'] = arrow_forward_light_img
+    forward_button['foreground'] = fg_b
 # ===============================================================
 
 
