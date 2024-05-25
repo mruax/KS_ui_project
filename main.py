@@ -238,14 +238,18 @@ def button_dd_clicked(event, button):
 
 
 def dd_minus_btn_on(event, button):
-    button["image"] = food_minus_dark_img
+    if button["state"] != "disabled":
+        button["image"] = food_minus_dark_img
 
 
 def dd_minus_btn_off(event, button):
-    button["image"] = food_minus_img
+    if button["state"] != "disabled":
+        button["image"] = food_minus_img
 
 
 def dd_minus_btn_clicked(event, button, side):
+    if button["state"] == "disabled":
+        return
     global user_selected_people_amount
     minus_button["image"] = food_minus_light_img
     product = user_selected_dishes[user_selected_page][side]
@@ -256,21 +260,27 @@ def dd_minus_btn_clicked(event, button, side):
         button["state"] = "disabled"
     if side == 0:
         food_plus_button_1["state"] = "active"
+        food_minus_button_1["image"] = food_minus_img
         counter_food_1["text"] = str(user_selected_dishes[user_selected_page][side])
     else:
         food_plus_button_2["state"] = "active"
+        food_minus_button_2["image"] = food_minus_img
         counter_food_2["text"] = str(user_selected_dishes[user_selected_page][side])
 
 
 def dd_plus_btn_on(event, button):
-    button["image"] = food_plus_dark_img
+    if button["state"] != "disabled":
+        button["image"] = food_plus_dark_img
 
 
 def dd_plus_btn_off(event, button):
-    button["image"] = food_plus_img
+    if button["state"] != "disabled":
+        button["image"] = food_plus_img
 
 
 def dd_plus_btn_clicked(event, button, side):
+    if button["state"] == "disabled":
+        return
     global user_selected_people_amount
     minus_button["image"] = food_minus_light_img
     product = user_selected_dishes[user_selected_page][side]
@@ -281,9 +291,11 @@ def dd_plus_btn_clicked(event, button, side):
         button["state"] = "disabled"
     if side == 0:
         food_minus_button_1["state"] = "active"
+        food_plus_button_1["image"] = food_plus_img
         counter_food_1["text"] = str(user_selected_dishes[user_selected_page][side])
     else:
         food_minus_button_2["state"] = "active"
+        food_plus_button_2["image"] = food_plus_img
         counter_food_2["text"] = str(user_selected_dishes[user_selected_page][side])
 # ==============================================================
 
@@ -441,7 +453,6 @@ def window5(event=None):
     counter_food_1.place(x=24 + 8, y=250 + 50 + 335 - 8 - 36)
     food_minus_button_1.place(x=24 + 8 + 4 + 2, y=250 + 50 + 335 - 8 - 36 + 4 + 1)
     food_plus_button_1.place(x=24 + 8 + 3 + 137 + 24 + 5 - 1, y=250 + 50 + 335 - 8 - 36 + 4)
-
 
     card_dish_2.place(x=width - 24 - 217, y=250 + 50)
     button_buy_2.place(x=width - 32 - 88, y=250 + 50 + 335)
