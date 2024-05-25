@@ -349,7 +349,7 @@ def window5(event=None):
     additional_elements()
     add_arrows()
 
-    number_block.place(x=143, y=height - 24 - 88 - 100)
+    number_block.place(x=143, y=height - 24 - 88 - 100 )
     menu_label.place(x=90, y=120)
 
     button_dish.place(x=23, y=200)
@@ -641,6 +641,49 @@ if __name__ == "__main__":
     # button_drinks.bind('<Leave>', button_drinks_off)
     # button_drinks.bind('<Button-1>', button_drinks_clicked)
 
+    card_1 = PhotoImage(file=Path(card1))
+    card_2 = PhotoImage(file=Path(card2))
+    card_3 = PhotoImage(file=Path(card3))
+    card_4 = PhotoImage(file=Path(card4))
+    card_5 = PhotoImage(file=Path(card5))
+    card_6 = PhotoImage(file=Path(card6))
+    card_7 = PhotoImage(file=Path(card7))
+    card_8 = PhotoImage(file=Path(card8))
+    card_d1 = PhotoImage(file=Path(cardn1))
+    card_d2 = PhotoImage(file=Path(cardn2))
+    card_d3 = PhotoImage(file=Path(cardn3))
+    card_d4 = PhotoImage(file=Path(cardn4))
+    card_d5 = PhotoImage(file=Path(cardn5))
+    card_d6 = PhotoImage(file=Path(cardn6))
+
+    card_dish_1 = Label(W, image=card_1, borderwidth=0, compound="center", bg=bg_peach_color,
+                        foreground=fg_b, font=global_font)
+    card_dish_2 = Label(W, image=card_2, borderwidth=0, compound="center", bg=bg_peach_color,
+                        foreground=fg_b, font=global_font)
+    card_dish_3 = Label(W, image=card_3, borderwidth=0, compound="center", bg=bg_peach_color,
+                        foreground=fg_b, font=global_font)
+    card_dish_4 = Label(W, image=card_4, borderwidth=0, compound="center", bg=bg_peach_color,
+                        foreground=fg_b, font=global_font)
+    card_dish_5 = Label(W, image=card_5, borderwidth=0, compound="center", bg=bg_peach_color,
+                        foreground=fg_b, font=global_font)
+    card_dish_6 = Label(W, image=card_6, borderwidth=0, compound="center", bg=bg_peach_color,
+                        foreground=fg_b, font=global_font)
+    card_dish_7 = Label(W, image=card_7, borderwidth=0, compound="center", bg=bg_peach_color,
+                        foreground=fg_b, font=global_font)
+    card_dish_8 = Label(W, image=card_8, borderwidth=0, compound="center", bg=bg_peach_color,
+                        foreground=fg_b, font=global_font)
+    card_drink_1 = Label(W, image=card_d1, borderwidth=0, compound="center", bg=bg_peach_color,
+                         foreground=fg_b, font=global_font)
+    card_drink_2 = Label(W, image=card_d2, borderwidth=0, compound="center", bg=bg_peach_color,
+                         foreground=fg_b, font=global_font)
+    card_drink_3 = Label(W, image=card_d3, borderwidth=0, compound="center", bg=bg_peach_color,
+                         foreground=fg_b, font=global_font)
+    card_drink_4 = Label(W, image=card_d4, borderwidth=0, compound="center", bg=bg_peach_color,
+                         foreground=fg_b, font=global_font)
+    card_drink_5 = Label(W, image=card_d5, borderwidth=0, compound="center", bg=bg_peach_color,
+                         foreground=fg_b, font=global_font)
+    card_drink_6 = Label(W, image=card_d6, borderwidth=0, compound="center", bg=bg_peach_color,
+                         foreground=fg_b, font=global_font)
 
 
     # ====================== Вызовы окон ======================
