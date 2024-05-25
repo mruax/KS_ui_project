@@ -487,7 +487,7 @@ def window5(event=None):
     additional_elements()
     add_arrows()
 
-    number_block.place(x=143, y=height - 24 - 88 - 90)
+    number_block.place(x=143, y=height - 24 - 88 - 83)
     menu_label.place(x=90, y=120)
 
     button_dish.place(x=23, y=200)
@@ -505,10 +505,10 @@ def window5(event=None):
     food_minus_button_2.place(x=width - 36 - 201 + 8 + 2, y=250 + 50 + 335 - 8 - 36 + 4)
     food_plus_button_2.place(x=width - 32 - 28 - 4 - 1, y=250 + 50 + 335 - 8 - 36 + 4)
 
-    number_button_1.place(x=(width - 214 + 2 + 6) // 2, y=height - 24 - 88 - 90 + 2)
-    number_button_2.place(x=(width - 90) // 2, y=height - 24 - 88 - 90 + 2)
-    number_button_3.place(x=(width + 26) // 2, y=height - 24 - 88 - 90 + 2)
-    number_button_4.place(x=(width + 214 - 72) // 2, y=height - 24 - 88 - 90 + 2)
+    number_button_1.place(x=(width - 214 + 2 + 6) // 2, y=height - 24 - 88 - 83 + 2)
+    number_button_2.place(x=(width - 90) // 2, y=height - 24 - 88 - 83 + 2)
+    number_button_3.place(x=(width + 26) // 2, y=height - 24 - 88 - 83 + 2)
+    number_button_4.place(x=(width + 214 - 72) // 2, y=height - 24 - 88 - 83 + 2)
 
 
 def window6(event=None):
@@ -518,11 +518,7 @@ def window6(event=None):
     additional_elements()
     add_arrows()
 
-    number_block.place(x=143, y=760)
-    menu_label.place(x=132, y=100)
 
-    button_dish.place(x=23, y=150)
-    button_drinks.place(x=260, y=150)
 
     ...
 
