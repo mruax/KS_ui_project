@@ -25,6 +25,7 @@ arrow_forward_dark = "src\\general\\forward_dark.png"
 arrow_forward_light = "src\\general\\forward_light.png"
 
 # Второе окно
+logo_2 = "src\\general\\logo_2.png"
 date_button = "src\\win2\\b_2.png"
 date_button_dark = "src\\win2\\b_2_dark.png"
 date_button_light = "src\\win2\\b_2_light.png"

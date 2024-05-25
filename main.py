@@ -175,6 +175,7 @@ def window2(event=None):
     window_number = 2
     additional_elements()
 
+    logo_label.place(x=24, y=44)
     date_label.place(x=24, y=124)
 
     date_button1.place(x=24, y=124 + 36 + 24)
@@ -274,6 +275,11 @@ if __name__ == "__main__":
     # ====================== Второе окно ======================
     solid_background = PhotoImage(file=Path(solid_bg))
     background_label = Label(W, image=solid_background, borderwidth=0)
+
+    # Логотипус:
+    logo = PhotoImage(file=Path(logo_2))
+    logo_label = Label(W, image=logo, borderwidth=0)
+
 
     # Стрелочки:
     arrows_block_image = PhotoImage(file=Path(arrows_block_bg))
@@ -420,7 +426,7 @@ if __name__ == "__main__":
     time_button12.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button12))
 
     # Количество человек:
-    people_label = Label(W, borderwidth=0, font=label_font, text="Выберите время",
+    people_label = Label(W, borderwidth=0, font=label_font, text="Выберите количество гостей",
                          fg=label_green_color, bg=bg_peach_color)
 
     counter_img_bg = PhotoImage(file=Path(counter_bg))
