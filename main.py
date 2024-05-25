@@ -141,6 +141,19 @@ def plus_btn_clicked(event):
 # ===============================================================
 
 
+# =================== Кнопки блюд и напитков ====================
+# def button_dish_on(event):
+#     button_dd['image'] = dd_button_dark
+#
+#
+# def button_dish_off(event):
+#     button_dd['image'] = dd_button_light
+#
+#
+# def button_dish_clicked(event):
+#     button_dd['image'] = dd_button
+
+
 def clearing_w_start():
     """
     Удаление всех виджетов из окна.
@@ -187,6 +200,7 @@ def additional_elements(event=None):
     :return: None
     """
     background_label.place(x=0, y=0)
+    logo_label.place(x=36, y=44)
 
     arrows_block.place(x=24, y=height - 24 - 88)
     back_button.place(x=24 + 48, y=height - 24 - 24 - 48)
@@ -211,7 +225,6 @@ def window2(event=None):
     window_number = 2
     additional_elements()
 
-    logo_label.place(x=36, y=44)
     date_label.place(x=24, y=124)
 
     date_button1.place(x=24, y=124 + 36 + 24)
@@ -269,6 +282,12 @@ def window5(event=None):
     window_number = 5
     clearing_w_start()
     additional_elements()
+
+    number_block.place(x=143, y=760)
+    menu_label.place(x=132, y=120)
+
+    button_dish.place(x=23, y=200)
+    button_drinks.place(x=260, y=200)
 
     ...
 
@@ -499,8 +518,28 @@ if __name__ == "__main__":
     plus_button.bind('<Button-1>', plus_btn_clicked)
 
     # ====================== Третье окно ====================== (window5)
-    menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
+    menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите блюда",
                        fg=label_green_color, bg=bg_peach_color)
+
+    number_block = Label(W, image=counter_img_bg, borderwidth=0, compound="center", bg=bg_peach_color,
+                        foreground=fg_b, font=global_font)
+
+    button_dd = PhotoImage(file=Path(dd_button))
+    button_dd_light = PhotoImage(file=Path(dd_button_light))
+    button_dd_dark = PhotoImage(file=Path(dd_button_dark))
+
+    button_dish = Label(W, image=button_dd, borderwidth=0, compound="center", bg=bg_peach_color,
+                        text="Блюда", foreground=fg_b, font=global_font, fg=fg_w)
+    button_drinks = Label(W, image=button_dd, borderwidth=0, compound="center", bg=bg_peach_color,
+                        text="Напитки", foreground=fg_b, font=global_font, fg=fg_w)
+
+    # button_dish.bind('<Enter>', button_dish_on)
+    # button_dish.bind('<Leave>', button_dish_off)
+    # button_dish.bind('<Button-1>', button_dish_clicked)
+    # button_drinks.bind('<Enter>', button_drinks_on)
+    # button_drinks.bind('<Leave>', button_drinks_off)
+    # button_drinks.bind('<Button-1>', button_drinks_clicked)
+
 
 
     # ====================== Вызовы окон ======================
