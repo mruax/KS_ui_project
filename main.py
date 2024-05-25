@@ -198,19 +198,36 @@ def plus_btn_clicked(event):
 
 
 # =================== Кнопки блюд и напитков ====================
-def button_dish_on(event):
-    button_dish['image'] = button_dd_dark
-    button_dish['foreground'] = fg_w
+def button_dd_on(event, button):
+    if not button.clicked:
+        button['image'] = button_dd_dark
+        button['foreground'] = fg_w
 
 
-def button_dish_off(event):
-    button_dish['image'] = button_dd
-    button_dish['foreground'] = fg_w
+def button_dd_off(event, button):
+    if not button.clicked:
+        button['image'] = button_dd
+        button['foreground'] = fg_w
 
 
-def button_dish_clicked(event):
-    button_dish['image'] = button_dd_light
-    button_dish['foreground'] = fg_b
+def button_dd_clicked(event, button):
+    global user_selected_page, user_selected_type
+    if not button.clicked:
+        user_selected_page = 1
+        button['image'] = button_dd_white
+        button['foreground'] = fg_b
+        button_drinks.clicked = False
+        button_dish.clicked = False
+        if button == button_dish:
+            button_drinks['image'] = button_dd
+            button_drinks['foreground'] = fg_w
+            user_selected_type = 1
+        else:
+            button_dish['image'] = button_dd
+            button_dish['foreground'] = fg_w
+            user_selected_type = 2
+        button.clicked = True
+# ==============================================================
 
 
 def clearing_w_start():
@@ -265,6 +282,12 @@ def additional_elements(event=None):
 
 
 def add_arrows(event=None):
+    """
+    Добавляет блок к с кнопками.
+
+    :param event: None
+    :return: None
+    """
     arrows_block.place(x=24, y=height - 24 - 88)
     back_button.place(x=24 + 48, y=height - 24 - 24 - 48)
     forward_button.place(x=24 + 48 + 100 + 20, y=height - 24 - 24 - 48)
@@ -619,27 +642,34 @@ if __name__ == "__main__":
     minus_button["state"] = "disabled"
 
     # ====================== Третье окно ====================== (window5)
+    # Переменные:
+    user_selected_page = 1
+    user_selected_type = 1  # 1 - food, 2 - drinks
+
     menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
                        fg=label_green_color, bg=bg_peach_color)
 
     number_block = Label(W, image=counter_img_bg, borderwidth=0, compound="center", bg=bg_peach_color,
-                        foreground=fg_b, font=global_font)
+                         foreground=fg_b, font=global_font)
 
     button_dd = PhotoImage(file=Path(dd_button))
-    button_dd_light = PhotoImage(file=Path(dd_button_light))
+    button_dd_white = PhotoImage(file=Path(dd_button_white))
     button_dd_dark = PhotoImage(file=Path(dd_button_dark))
+    button_fd = PhotoImage(file=Path(fd_button))
+    button_fd_light = PhotoImage(file=Path(fd_button_light))
+    button_fd_dark = PhotoImage(file=Path(fd_button_dark))
 
-    button_dish = Label(W, image=button_dd, borderwidth=0, compound="center", bg=bg_peach_color,
-                        text="Блюда", foreground=fg_b, font=global_font, fg=fg_w)
+    button_dish = Label(W, image=button_fd, borderwidth=0, compound="center", bg=bg_peach_color,
+                        text="Блюда", foreground=fg_b, font=global_font, fg=fg_b)
     button_drinks = Label(W, image=button_dd, borderwidth=0, compound="center", bg=bg_peach_color,
-                        text="Напитки", foreground=fg_b, font=global_font, fg=fg_w)
+                          text="Напитки", foreground=fg_b, font=global_font, fg=fg_w)
 
-    button_dish.bind('<Enter>', button_dish_on)
-    button_dish.bind('<Leave>', button_dish_off)
-    button_dish.bind('<Button-1>', button_dish_clicked)
-    # button_drinks.bind('<Enter>', button_drinks_on)
-    # button_drinks.bind('<Leave>', button_drinks_off)
-    # button_drinks.bind('<Button-1>', button_drinks_clicked)
+    button_dish.bind('<Enter>', lambda event: button_dd_on(event, button_dish))
+    button_dish.bind('<Leave>', lambda event: button_dd_off(event, button_dish))
+    button_dish.bind('<Button-1>', lambda event: button_dd_clicked(event, button_dish))
+    button_drinks.bind('<Enter>', lambda event: button_dd_on(event, button_drinks))
+    button_drinks.bind('<Leave>', lambda event: button_dd_off(event, button_drinks))
+    button_drinks.bind('<Button-1>', lambda event: button_dd_clicked(event, button_drinks))
 
     card_1 = PhotoImage(file=Path(card1))
     card_2 = PhotoImage(file=Path(card2))
@@ -684,7 +714,8 @@ if __name__ == "__main__":
                          foreground=fg_b, font=global_font)
     card_drink_6 = Label(W, image=card_d6, borderwidth=0, compound="center", bg=bg_peach_color,
                          foreground=fg_b, font=global_font)
-
+    button_dish.clicked = True
+    button_drinks.clicked = False
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
