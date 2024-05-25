@@ -64,18 +64,54 @@ def change_color_back(event=None):
 
 # ========================= Кнопки дат ==========================
 def date_btn_on(event, button):
-    button["image"] = date_btn_img_dark
-    button["foreground"] = fg_w
+    if not button.clicked:
+        button["image"] = date_btn_img_dark
+        button["foreground"] = fg_w
+    else:
+        button["image"] = date_btn_img_dark
+        button["foreground"] = fg_b
 
 
 def date_btn_off(event, button):
-    button["image"] = date_btn_img
-    button["foreground"] = fg_w
+    if not button.clicked:
+        button["image"] = date_btn_img
+        button["foreground"] = fg_w
+    else:
+        button["image"] = date_btn_img_on
+        button["foreground"] = fg_b
 
 
 def date_btn_clicked(event, button):
-    button["image"] = date_btn_img_light
-    button["foreground"] = fg_b
+    if button.clicked is False:
+        button.clicked = True
+    else:
+        button.clicked = False
+    select_date(event, button)
+
+    null_other_buttons(event, button)
+
+
+def null_other_buttons(event, button):
+    for id in range(5):
+        try:
+            btn = globals().get(f"date_button{id + 1}")
+            if btn["text"] == button["text"]:
+                btn["foreground"] = fg_b
+                button["image"] = date_btn_img_on
+            else:
+                btn["image"] = date_btn_img
+                btn["foreground"] = fg_w
+                btn.clicked = False
+        except Exception as e:
+            pass
+
+
+def select_date(event, button):
+    global user_selected_date
+    if not user_selected_date:
+        user_selected_date = button["text"]
+    elif not button.clicked:
+        user_selected_date = None
 # ===============================================================
 
 
@@ -115,6 +151,19 @@ def clearing_w_start():
         widget.place_forget()
 
 
+def next_win():
+    """
+    Функция для открытия следующего окна в зависимости от window_number.
+
+    :return: None
+    """
+    try:
+        function = globals().get(f"window{window_number+1}")
+        function()
+    except Exception as e:
+        pass
+
+
 def back_win():
     """
     Функция для открытия предыдущего окна в зависимости от window_number.
@@ -130,37 +179,11 @@ def back_win():
         window2()
 
 
-def next_win():
-    """
-    Функция для открытия следующего окна в зависимости от window_number.
-
-    :return: None
-    """
-    try:
-        function = globals().get(f"window{window_number+1}")
-        function()
-    except Exception as e:
-        pass
-
-
-def window1(event=None):
-    """
-    Размещает элементы интерфейса n-нного окна.
-
-    :param e: None
-    :return: None
-    """
-    global window_number
-    window_number = 1
-    bg_start.place(x=0, y=0)
-    Button_start.place(x=130, y=600, width=243, height=54)
-
-
 def additional_elements(event=None):
     """
     Одинаковые элементы окон - стрелки, фон и тп.
 
-    :param e: None
+    :param event: None
     :return: None
     """
     background_label.place(x=0, y=0)
@@ -168,6 +191,19 @@ def additional_elements(event=None):
     arrows_block.place(x=24, y=height - 24 - 88)
     back_button.place(x=24 + 48, y=height - 24 - 24 - 48)
     forward_button.place(x=24 + 48 + 100 + 20, y=height - 24 - 24 - 48)
+
+
+def window1(event=None):
+    """
+    Размещает элементы интерфейса n-нного окна.
+
+    :param event: None
+    :return: None
+    """
+    global window_number
+    window_number = 1
+    bg_start.place(x=0, y=0)
+    Button_start.place(x=130, y=600, width=243, height=54)
 
 
 def window2(event=None):
@@ -248,7 +284,7 @@ if __name__ == "__main__":
     label_green_color = rgbtohex(r=109, g=191, b=102)  # светло-зеленый
     bg_peach_color = rgbtohex(r=252, g=240, b=227)  # персиковый
 
-    # ====================== Стартовое окно ======================
+    # ====================== Стартовое окно ====================== (window1)
     W = Tk()
     W.geometry(f"{width}x{height}")
     W.title("Ресторан \"Хмели-сунели\"")
@@ -272,14 +308,18 @@ if __name__ == "__main__":
     Button_start.bind('<Leave>', off_start)
     Button_start.bind('<Button-1>', change_color_start)
 
-    # ====================== Второе окно ======================
+    # ====================== Второе окно ====================== (window2, window3, window4)
+    # Переменные:
+    user_selected_date = None
+    user_selected_time = None
+    user_selected_people_amount = None
+
     solid_background = PhotoImage(file=Path(solid_bg))
     background_label = Label(W, image=solid_background, borderwidth=0)
 
     # Логотипус:
     logo = PhotoImage(file=Path(logo_2))
     logo_label = Label(W, image=logo, borderwidth=0)
-
 
     # Стрелочки:
     arrows_block_image = PhotoImage(file=Path(arrows_block_bg))
@@ -330,6 +370,12 @@ if __name__ == "__main__":
     date_button5 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
                           compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
                           text="10 июня", font=global_font, foreground=fg_w)
+
+    date_button1.clicked = False
+    date_button2.clicked = False
+    date_button3.clicked = False
+    date_button4.clicked = False
+    date_button5.clicked = False
 
     date_button1.bind('<Enter>', lambda event: date_btn_on(event, date_button1))
     date_button1.bind('<Leave>', lambda event: date_btn_off(event, date_button1))
@@ -452,7 +498,7 @@ if __name__ == "__main__":
     plus_button.bind('<Leave>', plus_btn_off)
     plus_button.bind('<Button-1>', plus_btn_clicked)
 
-    # ====================== Третье окно ======================
+    # ====================== Третье окно ====================== (window5)
     menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
                        fg=label_green_color, bg=bg_peach_color)
 
