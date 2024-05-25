@@ -175,7 +175,7 @@ def window2(event=None):
     window_number = 2
     additional_elements()
 
-    logo_label.place(x=24, y=44)
+    logo_label.place(x=36, y=44)
     date_label.place(x=24, y=124)
 
     date_button1.place(x=24, y=124 + 36 + 24)
