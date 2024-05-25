@@ -66,10 +66,9 @@ def change_color_back(event=None):
 def date_btn_on(event, button):
     if not button.clicked:
         button["image"] = date_btn_img_dark
-        button["foreground"] = fg_w
     else:
         button["image"] = date_btn_img_dark
-        button["foreground"] = fg_b
+    button["foreground"] = fg_w
 
 
 def date_btn_off(event, button):
@@ -247,11 +246,13 @@ def back_win():
     if window_number == 5:
         clearing_w_start()
         window2()
+        window3()
+        window4()
 
 
 def additional_elements(event=None):
     """
-    Одинаковые элементы окон - стрелки, фон и тп.
+    Одинаковые элементы окон - лого, фон и тп.
 
     :param event: None
     :return: None
@@ -259,6 +260,8 @@ def additional_elements(event=None):
     background_label.place(x=0, y=0)
     logo_label.place(x=36, y=44)
 
+
+def add_arrows(event=None):
     arrows_block.place(x=24, y=height - 24 - 88)
     back_button.place(x=24 + 48, y=height - 24 - 24 - 48)
     forward_button.place(x=24 + 48 + 100 + 20, y=height - 24 - 24 - 48)
@@ -333,12 +336,31 @@ def window4(event=None):
     minus_button.place(x=24 + 4, y=612 + 32 + 48 + 24 + 38 + 4)
     plus_button.place(x=24 + 214 - 28 - 4, y=612 + 32 + 48 + 24 + 38 + 4)
 
+    add_arrows()
+
 
 def window5(event=None):
     global window_number
     window_number = 5
     clearing_w_start()
     additional_elements()
+    add_arrows()
+
+    number_block.place(x=143, y=760)
+    menu_label.place(x=132, y=120)
+
+    button_dish.place(x=23, y=200)
+    button_drinks.place(x=260, y=200)
+
+    ...
+
+
+def window6(event=None):
+    global window_number
+    window_number = 6
+    clearing_w_start()
+    additional_elements()
+    add_arrows()
 
     number_block.place(x=143, y=760)
     menu_label.place(x=132, y=120)
@@ -421,6 +443,9 @@ if __name__ == "__main__":
     forward_button.bind("<Enter>", on_forward)
     forward_button.bind("<Leave>", off_forward)
     forward_button.bind("<Button-1>", change_color_forward)
+
+    # back_button["state"] = "disabled"
+    # forward_button["state"] = "disabled"
 
     # Даты:
     date_label = Label(W, borderwidth=0, font=label_font, text="Выберите дату",
