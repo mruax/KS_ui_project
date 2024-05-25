@@ -297,6 +297,18 @@ def dd_plus_btn_clicked(event, button, side):
         food_minus_button_2["state"] = "active"
         food_plus_button_2["image"] = food_plus_img
         counter_food_2["text"] = str(user_selected_dishes[user_selected_page][side])
+
+
+def buy_button_on(event, button):
+    pass
+
+
+def buy_button_off(event, button):
+    pass
+
+
+def buy_button_off(event, button):
+    pass
 # ==============================================================
 
 
@@ -814,6 +826,13 @@ if __name__ == "__main__":
                           activebackground=bg_w, foreground=fg_b, font=global_font, fg=fg_b)
     button_buy_2 = Button(W, image=image_buy, borderwidth=0, compound="center", bg=bg_w,
                           activebackground=bg_w, foreground=fg_b, font=global_font, fg=fg_b)
+
+    button_buy_1.bind("<Enter>", lambda event: dd_minus_btn_on(event, food_minus_button_1))
+    button_buy_1.bind("<Leave>", lambda event: dd_minus_btn_off(event, food_minus_button_1))
+    button_buy_1.bind("<Button-1>", lambda event: dd_minus_btn_clicked(event, food_minus_button_1, side=0))
+    button_buy_2.bind("<Enter>", lambda event: dd_minus_btn_on(event, food_minus_button_2))
+    button_buy_2.bind("<Leave>", lambda event: dd_minus_btn_off(event, food_minus_button_2))
+    button_buy_2.bind("<Button-1>", lambda event: dd_minus_btn_clicked(event, food_minus_button_2, side=1))
 
     image_bg_counter_food = PhotoImage(file=Path(bg_counter_food))
 
