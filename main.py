@@ -199,16 +199,19 @@ def plus_btn_clicked(event):
 
 
 # =================== Кнопки блюд и напитков ====================
-# def button_dish_on(event):
-#     button_dd['image'] = dd_button_dark
-#
-#
-# def button_dish_off(event):
-#     button_dd['image'] = dd_button_light
-#
-#
-# def button_dish_clicked(event):
-#     button_dd['image'] = dd_button
+def button_dish_on(event):
+    button_dish['image'] = button_dd_dark
+    button_dish['foreground'] = fg_w
+
+
+def button_dish_off(event):
+    button_dish['image'] = button_dd
+    button_dish['foreground'] = fg_w
+
+
+def button_dish_clicked(event):
+    button_dish['image'] = button_dd_light
+    button_dish['foreground'] = fg_b
 
 
 def clearing_w_start():
@@ -591,7 +594,7 @@ if __name__ == "__main__":
     minus_button["state"] = "disabled"
 
     # ====================== Третье окно ====================== (window5)
-    menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите блюда",
+    menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
                        fg=label_green_color, bg=bg_peach_color)
 
     number_block = Label(W, image=counter_img_bg, borderwidth=0, compound="center", bg=bg_peach_color,
@@ -606,9 +609,9 @@ if __name__ == "__main__":
     button_drinks = Label(W, image=button_dd, borderwidth=0, compound="center", bg=bg_peach_color,
                         text="Напитки", foreground=fg_b, font=global_font, fg=fg_w)
 
-    # button_dish.bind('<Enter>', button_dish_on)
-    # button_dish.bind('<Leave>', button_dish_off)
-    # button_dish.bind('<Button-1>', button_dish_clicked)
+    button_dish.bind('<Enter>', button_dish_on)
+    button_dish.bind('<Leave>', button_dish_off)
+    button_dish.bind('<Button-1>', button_dish_clicked)
     # button_drinks.bind('<Enter>', button_drinks_on)
     # button_drinks.bind('<Leave>', button_drinks_off)
     # button_drinks.bind('<Button-1>', button_drinks_clicked)

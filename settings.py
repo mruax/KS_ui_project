@@ -41,5 +41,5 @@ plus_dark = "src\\win2\\plus_dark.png"
 
 # Третье окно
 dd_button = "src\\win3\\dish_or_drinks.png"
-dd_button_light = "src\\win3\\dish_or_drinks_light.png"
+dd_button_light = "src\\win3\\dish_or_drinks_white.png"
 dd_button_dark = "src\\win3\\dish_or_drinks_dark.png"
