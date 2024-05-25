@@ -155,14 +155,18 @@ def select_time(event, button):
 
 # ======================== Кнопки + и - =========================
 def minus_btn_on(event):
-    minus_button["image"] = minus_dark_img
+    if minus_button["state"] != "disabled":
+        minus_button["image"] = minus_dark_img
 
 
 def minus_btn_off(event):
-    minus_button["image"] = minus_img
+    if minus_button["state"] != "disabled":
+        minus_button["image"] = minus_img
 
 
 def minus_btn_clicked(event):
+    if minus_button["state"] == "disabled":
+        return
     global user_selected_people_amount
     minus_button["image"] = minus_light_img
     if user_selected_people_amount > 1:
@@ -176,14 +180,18 @@ def minus_btn_clicked(event):
 
 
 def plus_btn_on(event):
-    plus_button["image"] = plus_dark_img
+    if plus_button["state"] != "disabled":
+        plus_button["image"] = plus_dark_img
 
 
 def plus_btn_off(event):
-    plus_button["image"] = plus_img
+    if plus_button["state"] != "disabled":
+        plus_button["image"] = plus_img
 
 
 def plus_btn_clicked(event):
+    if plus_button["state"] == "disabled":
+        return
     global user_selected_people_amount
     plus_button["image"] = plus_light_img
     if user_selected_people_amount < 6:
@@ -227,6 +235,56 @@ def button_dd_clicked(event, button):
             button_dish['foreground'] = fg_w
             user_selected_type = 2
         button.clicked = True
+
+
+def dd_minus_btn_on(event, button):
+    button["image"] = food_minus_dark_img
+
+
+def dd_minus_btn_off(event, button):
+    button["image"] = food_minus_img
+
+
+def dd_minus_btn_clicked(event, button, side):
+    global user_selected_people_amount
+    minus_button["image"] = food_minus_light_img
+    product = user_selected_dishes[user_selected_page][side]
+
+    if product > 0:
+        user_selected_dishes[user_selected_page][side] -= 1
+    if product - 1 == 0:
+        button["state"] = "disabled"
+    if side == 0:
+        food_plus_button_1["state"] = "active"
+        counter_food_1["text"] = str(user_selected_dishes[user_selected_page][side])
+    else:
+        food_plus_button_2["state"] = "active"
+        counter_food_2["text"] = str(user_selected_dishes[user_selected_page][side])
+
+
+def dd_plus_btn_on(event, button):
+    button["image"] = food_plus_dark_img
+
+
+def dd_plus_btn_off(event, button):
+    button["image"] = food_plus_img
+
+
+def dd_plus_btn_clicked(event, button, side):
+    global user_selected_people_amount
+    minus_button["image"] = food_minus_light_img
+    product = user_selected_dishes[user_selected_page][side]
+
+    if product < 10:
+        user_selected_dishes[user_selected_page][side] += 1
+    if product + 1 == 10:
+        button["state"] = "disabled"
+    if side == 0:
+        food_minus_button_1["state"] = "active"
+        counter_food_1["text"] = str(user_selected_dishes[user_selected_page][side])
+    else:
+        food_minus_button_2["state"] = "active"
+        counter_food_2["text"] = str(user_selected_dishes[user_selected_page][side])
 # ==============================================================
 
 
@@ -684,6 +742,7 @@ if __name__ == "__main__":
                            activebackground=bg_peach_color, text="Напитки", foreground=fg_b, font=global_font, fg=fg_w)
 
     button_dish.bind('<Enter>', lambda event: button_dd_on(event, button_dish))
+    button_dish.bind('<Enter>', lambda event: button_dd_on(event, button_dish))
     button_dish.bind('<Leave>', lambda event: button_dd_off(event, button_dish))
     button_dish.bind('<Button-1>', lambda event: button_dd_clicked(event, button_dish))
     button_drinks.bind('<Enter>', lambda event: button_dd_on(event, button_drinks))
@@ -768,20 +827,18 @@ if __name__ == "__main__":
     food_plus_button_2 = Button(W, image=food_plus_img, borderwidth=0,  # , command=next_win
                                 compound="center", bg=bg_light_gray_color, activebackground=bg_light_gray_color)
 
-    food_minus_button_1.bind("<Enter>", minus_btn_on)
-    food_minus_button_1.bind("<Leave>", minus_btn_off)
-    food_minus_button_1.bind("<Button-1>", minus_btn_clicked)
-    food_minus_button_2.bind("<Enter>", minus_btn_on)
-    food_minus_button_2.bind("<Leave>", minus_btn_off)
-    food_minus_button_2.bind("<Button-1>", minus_btn_clicked)
-    food_plus_button_1.bind("<Enter>", plus_btn_on)
-    food_plus_button_1.bind("<Leave>", plus_btn_off)
-    food_plus_button_1.bind("<Button-1>", plus_btn_clicked)
-    food_plus_button_2.bind("<Enter>", plus_btn_on)
-    food_plus_button_2.bind("<Leave>", plus_btn_off)
-    food_plus_button_2.bind("<Button-1>", plus_btn_clicked)
-
-
+    food_minus_button_1.bind("<Enter>", lambda event: dd_minus_btn_on(event, food_minus_button_1))
+    food_minus_button_1.bind("<Leave>", lambda event: dd_minus_btn_off(event, food_minus_button_1))
+    food_minus_button_1.bind("<Button-1>", lambda event: dd_minus_btn_clicked(event, food_minus_button_1, side=0))
+    food_minus_button_2.bind("<Enter>", lambda event: dd_minus_btn_on(event, food_minus_button_2))
+    food_minus_button_2.bind("<Leave>", lambda event: dd_minus_btn_off(event, food_minus_button_2))
+    food_minus_button_2.bind("<Button-1>", lambda event: dd_minus_btn_clicked(event, food_minus_button_2, side=1))
+    food_plus_button_1.bind("<Enter>", lambda event: dd_plus_btn_on(event, food_plus_button_1))
+    food_plus_button_1.bind("<Leave>", lambda event: dd_plus_btn_off(event, food_plus_button_1))
+    food_plus_button_1.bind("<Button-1>", lambda event: dd_plus_btn_clicked(event, food_plus_button_1, side=0))
+    food_plus_button_2.bind("<Enter>", lambda event: dd_plus_btn_on(event, food_plus_button_2))
+    food_plus_button_2.bind("<Leave>", lambda event: dd_plus_btn_off(event, food_plus_button_2))
+    food_plus_button_2.bind("<Button-1>", lambda event: dd_plus_btn_clicked(event, food_plus_button_2, side=1))
 
     food_minus_button_1["state"] = "disabled"
     food_minus_button_2["state"] = "disabled"
