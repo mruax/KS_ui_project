@@ -378,6 +378,10 @@ def window5(event=None):
     button_dish.place(x=23, y=200)
     button_drinks.place(x=260, y=200)
 
+    # card_dish_1.place(x=24, y=250 + 50)
+    # card_dish_2.place(x=width - 24 - 217, y=250 + 50)
+    card_dish_1.place(x=24, y=250 + 50)
+    card_dish_2.place(x=width - 24 - 217, y=250 + 50)
     card_dish_1.place(x=24, y=250 + 50)
     card_dish_2.place(x=width - 24 - 217, y=250 + 50)
 
@@ -721,7 +725,7 @@ if __name__ == "__main__":
     button_dish.clicked = True
     button_drinks.clicked = False
 
-    
+
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
