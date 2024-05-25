@@ -30,6 +30,7 @@ date_button = "src\\win2\\b_2.png"
 date_button_dark = "src\\win2\\b_2_dark.png"
 date_button_light = "src\\win2\\b_2_light.png"
 date_button_on = "src\\win2\\b_2_border_white.png"  # rename file border -> on
+date_button_gray = "src\\win2\\b_2_gray.png"
 counter_bg = "src\\win2\\bg_counter.png"
 minus_normal = "src\\win2\\minus.png"
 minus_light = "src\\win2\\minus_light.png"

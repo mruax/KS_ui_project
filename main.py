@@ -14,51 +14,51 @@ def rgbtohex(r, g, b):
     :param b: blue
     :return: rgb format string - #******
     """
-    return f'#{r:02x}{g:02x}{b:02x}'
+    return f"#{r:02x}{g:02x}{b:02x}"
 
 
 # ======================== Кнопка начала ========================
 def on_start(event=None):
-    Button_start['image'] = b_start_dark
+    Button_start["image"] = b_start_dark
 
 
 def off_start(event=None):
-    Button_start['image'] = b_start
+    Button_start["image"] = b_start
 
 
 def change_color_start(event=None):
-    Button_start['image'] = b_start_light
+    Button_start["image"] = b_start_light
 # ===============================================================
 
 
 # ======================== Кнопка вперед ========================
 def on_forward(event=None):
-    forward_button['image'] = arrow_forward_dark_img
-    forward_button['foreground'] = fg_w
+    forward_button["image"] = arrow_forward_dark_img
+    forward_button["foreground"] = fg_w
 
 
 def off_forward(event=None):
-    forward_button['image'] = arrow_forward_img
-    forward_button['foreground'] = fg_w
+    forward_button["image"] = arrow_forward_img
+    forward_button["foreground"] = fg_w
 
 
 def change_color_forward(event=None):
-    forward_button['image'] = arrow_forward_light_img
-    forward_button['foreground'] = fg_b
+    forward_button["image"] = arrow_forward_light_img
+    forward_button["foreground"] = fg_b
 # ===============================================================
 
 
 # ======================== Кнопка назад =========================
 def on_back(event=None):
-    back_button['image'] = arrow_back_dark_img
+    back_button["image"] = arrow_back_dark_img
 
 
 def off_back(event=None):
-    back_button['image'] = arrow_back_img
+    back_button["image"] = arrow_back_img
 
 
 def change_color_back(event=None):
-    back_button['image'] = arrow_back_light_img
+    back_button["image"] = arrow_back_light_img
 # ===============================================================
 
 
@@ -88,16 +88,16 @@ def date_btn_clicked(event, button):
         button.clicked = False
     select_date(event, button)
 
-    null_other_buttons(event, button)
+    null_other_date_buttons(event, button)
 
 
-def null_other_buttons(event, button):
+def null_other_date_buttons(event, button):
     for id in range(5):
         try:
             btn = globals().get(f"date_button{id + 1}")
             if btn["text"] == button["text"]:
                 btn["foreground"] = fg_b
-                button["image"] = date_btn_img_on
+                button["image"] = date_btn_img_light
             else:
                 btn["image"] = date_btn_img
                 btn["foreground"] = fg_w
@@ -110,34 +110,91 @@ def select_date(event, button):
     global user_selected_date
     if not user_selected_date:
         user_selected_date = button["text"]
+        if window_number == 2:
+            window3()
     elif not button.clicked:
         user_selected_date = None
 # ===============================================================
 
 
+# ======================= Кнопки времени ========================
+def time_btn_clicked(event, button):
+    if button.clicked is False:
+        button.clicked = True
+    else:
+        button.clicked = False
+    select_time(event, button)
+
+    null_other_time_buttons(event, button)
+
+
+def null_other_time_buttons(event, button):
+    for id in range(12):
+        try:
+            btn = globals().get(f"time_button{id + 1}")
+            if btn["text"] == button["text"]:
+                btn["foreground"] = fg_b
+                button["image"] = date_btn_img_light
+            else:
+                btn["image"] = date_btn_img
+                btn["foreground"] = fg_w
+                btn.clicked = False
+        except Exception as e:
+            pass
+
+
+def select_time(event, button):
+    global user_selected_time
+    if not user_selected_time:
+        user_selected_time = button["text"]
+        if window_number == 3:
+            window4()
+    elif not button.clicked:
+        user_selected_time = None
+# ===============================================================
+
+
 # ======================== Кнопки + и - =========================
 def minus_btn_on(event):
-    minus_button['image'] = minus_dark_img
+    minus_button["image"] = minus_dark_img
 
 
 def minus_btn_off(event):
-    minus_button['image'] = minus_img
+    minus_button["image"] = minus_img
 
 
 def minus_btn_clicked(event):
-    minus_button['image'] = minus_light_img
+    global user_selected_people_amount
+    minus_button["image"] = minus_light_img
+    if user_selected_people_amount > 1:
+        user_selected_people_amount -= 1
+    if user_selected_people_amount == 1:
+        minus_button["state"] = "disabled"
+    else:
+        minus_button["state"] = "active"
+    plus_button["state"] = "active"
+    counter_block["text"] = str(user_selected_people_amount)
 
 
 def plus_btn_on(event):
-    plus_button['image'] = plus_dark_img
+    plus_button["image"] = plus_dark_img
 
 
 def plus_btn_off(event):
-    plus_button['image'] = plus_img
+    plus_button["image"] = plus_img
 
 
 def plus_btn_clicked(event):
-    plus_button['image'] = plus_light_img
+    global user_selected_people_amount
+    plus_button["image"] = plus_light_img
+    if user_selected_people_amount < 6:
+        user_selected_people_amount += 1
+    if user_selected_people_amount == 6:
+        plus_button["state"] = "disabled"
+    else:
+        plus_button["state"] = "active"
+    minus_button["state"] = "active"
+    counter_block["text"] = str(user_selected_people_amount)
 # ===============================================================
 
 
@@ -323,15 +380,15 @@ if __name__ == "__main__":
                           text="ЗАБРОНИРОВАТЬ СТОЛ", compound="center",
                           fg=fg_w, font=global_font, activebackground=bg_peach_color,
                           command=window2)
-    Button_start.bind('<Enter>', on_start)
-    Button_start.bind('<Leave>', off_start)
-    Button_start.bind('<Button-1>', change_color_start)
+    Button_start.bind("<Enter>", on_start)
+    Button_start.bind("<Leave>", off_start)
+    Button_start.bind("<Button-1>", change_color_start)
 
     # ====================== Второе окно ====================== (window2, window3, window4)
     # Переменные:
     user_selected_date = None
     user_selected_time = None
-    user_selected_people_amount = None
+    user_selected_people_amount = 1
 
     solid_background = PhotoImage(file=Path(solid_bg))
     background_label = Label(W, image=solid_background, borderwidth=0)
@@ -350,9 +407,9 @@ if __name__ == "__main__":
 
     back_button = Button(W, image=arrow_back_img, borderwidth=0,
                          compound="center", command=back_win, bg=bg_w, activebackground=bg_w)
-    back_button.bind('<Enter>', on_back)
-    back_button.bind('<Leave>', off_back)
-    back_button.bind('<Button-1>', change_color_back)
+    back_button.bind("<Enter>", on_back)
+    back_button.bind("<Leave>", off_back)
+    back_button.bind("<Button-1>", change_color_back)
 
     arrow_forward_img = PhotoImage(file=Path(arrow_forward))
     arrow_forward_dark_img = PhotoImage(file=Path(arrow_forward_dark))
@@ -361,9 +418,9 @@ if __name__ == "__main__":
     forward_button = Button(W, image=arrow_forward_img, borderwidth=0,
                             text="ДАЛЕЕ", font=global_font, foreground=fg_w,
                             compound="center", command=next_win, bg=bg_w, activebackground=bg_w)
-    forward_button.bind('<Enter>', on_forward)
-    forward_button.bind('<Leave>', off_forward)
-    forward_button.bind('<Button-1>', change_color_forward)
+    forward_button.bind("<Enter>", on_forward)
+    forward_button.bind("<Leave>", off_forward)
+    forward_button.bind("<Button-1>", change_color_forward)
 
     # Даты:
     date_label = Label(W, borderwidth=0, font=label_font, text="Выберите дату",
@@ -373,6 +430,7 @@ if __name__ == "__main__":
     date_btn_img_light = PhotoImage(file=Path(date_button_light))
     date_btn_img_dark = PhotoImage(file=Path(date_button_dark))
     date_btn_img_on = PhotoImage(file=Path(date_button_on))
+    date_btn_gray = PhotoImage(file=Path(date_button_gray))
 
     date_button1 = Button(W, image=date_btn_img, borderwidth=0,  # , command=next_win
                           compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
@@ -396,21 +454,21 @@ if __name__ == "__main__":
     date_button4.clicked = False
     date_button5.clicked = False
 
-    date_button1.bind('<Enter>', lambda event: date_btn_on(event, date_button1))
-    date_button1.bind('<Leave>', lambda event: date_btn_off(event, date_button1))
-    date_button1.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button1))
-    date_button2.bind('<Enter>', lambda event: date_btn_on(event, date_button2))
-    date_button2.bind('<Leave>', lambda event: date_btn_off(event, date_button2))
-    date_button2.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button2))
-    date_button3.bind('<Enter>', lambda event: date_btn_on(event, date_button3))
-    date_button3.bind('<Leave>', lambda event: date_btn_off(event, date_button3))
-    date_button3.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button3))
-    date_button4.bind('<Enter>', lambda event: date_btn_on(event, date_button4))
-    date_button4.bind('<Leave>', lambda event: date_btn_off(event, date_button4))
-    date_button4.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button4))
-    date_button5.bind('<Enter>', lambda event: date_btn_on(event, date_button5))
-    date_button5.bind('<Leave>', lambda event: date_btn_off(event, date_button5))
-    date_button5.bind('<Button-1>', lambda event: date_btn_clicked(event, date_button5))
+    date_button1.bind("<Enter>", lambda event: date_btn_on(event, date_button1))
+    date_button1.bind("<Leave>", lambda event: date_btn_off(event, date_button1))
+    date_button1.bind("<Button-1>", lambda event: date_btn_clicked(event, date_button1))
+    date_button2.bind("<Enter>", lambda event: date_btn_on(event, date_button2))
+    date_button2.bind("<Leave>", lambda event: date_btn_off(event, date_button2))
+    date_button2.bind("<Button-1>", lambda event: date_btn_clicked(event, date_button2))
+    date_button3.bind("<Enter>", lambda event: date_btn_on(event, date_button3))
+    date_button3.bind("<Leave>", lambda event: date_btn_off(event, date_button3))
+    date_button3.bind("<Button-1>", lambda event: date_btn_clicked(event, date_button3))
+    date_button4.bind("<Enter>", lambda event: date_btn_on(event, date_button4))
+    date_button4.bind("<Leave>", lambda event: date_btn_off(event, date_button4))
+    date_button4.bind("<Button-1>", lambda event: date_btn_clicked(event, date_button4))
+    date_button5.bind("<Enter>", lambda event: date_btn_on(event, date_button5))
+    date_button5.bind("<Leave>", lambda event: date_btn_off(event, date_button5))
+    date_button5.bind("<Button-1>", lambda event: date_btn_clicked(event, date_button5))
 
     # Время:
     time_label = Label(W, borderwidth=0, font=label_font, text="Выберите время",
@@ -453,42 +511,55 @@ if __name__ == "__main__":
                            compound="center", bg=bg_peach_color, activebackground=bg_peach_color,
                            text="23:00", font=global_font, foreground=fg_w)
 
-    time_button1.bind('<Enter>', lambda event: date_btn_on(event, time_button1))
-    time_button1.bind('<Leave>', lambda event: date_btn_off(event, time_button1))
-    time_button1.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button1))
-    time_button2.bind('<Enter>', lambda event: date_btn_on(event, time_button2))
-    time_button2.bind('<Leave>', lambda event: date_btn_off(event, time_button2))
-    time_button2.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button2))
-    time_button3.bind('<Enter>', lambda event: date_btn_on(event, time_button3))
-    time_button3.bind('<Leave>', lambda event: date_btn_off(event, time_button3))
-    time_button3.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button3))
-    time_button4.bind('<Enter>', lambda event: date_btn_on(event, time_button4))
-    time_button4.bind('<Leave>', lambda event: date_btn_off(event, time_button4))
-    time_button4.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button4))
-    time_button5.bind('<Enter>', lambda event: date_btn_on(event, time_button5))
-    time_button5.bind('<Leave>', lambda event: date_btn_off(event, time_button5))
-    time_button5.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button5))
-    time_button6.bind('<Enter>', lambda event: date_btn_on(event, time_button6))
-    time_button6.bind('<Leave>', lambda event: date_btn_off(event, time_button6))
-    time_button6.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button6))
-    time_button7.bind('<Enter>', lambda event: date_btn_on(event, time_button7))
-    time_button7.bind('<Leave>', lambda event: date_btn_off(event, time_button7))
-    time_button7.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button7))
-    time_button8.bind('<Enter>', lambda event: date_btn_on(event, time_button8))
-    time_button8.bind('<Leave>', lambda event: date_btn_off(event, time_button8))
-    time_button8.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button8))
-    time_button9.bind('<Enter>', lambda event: date_btn_on(event, time_button9))
-    time_button9.bind('<Leave>', lambda event: date_btn_off(event, time_button9))
-    time_button9.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button9))
-    time_button10.bind('<Enter>', lambda event: date_btn_on(event, time_button10))
-    time_button10.bind('<Leave>', lambda event: date_btn_off(event, time_button10))
-    time_button10.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button10))
-    time_button11.bind('<Enter>', lambda event: date_btn_on(event, time_button11))
-    time_button11.bind('<Leave>', lambda event: date_btn_off(event, time_button11))
-    time_button11.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button11))
-    time_button12.bind('<Enter>', lambda event: date_btn_on(event, time_button12))
-    time_button12.bind('<Leave>', lambda event: date_btn_off(event, time_button12))
-    time_button12.bind('<Button-1>', lambda event: date_btn_clicked(event, time_button12))
+    time_button1.clicked = False
+    time_button2.clicked = False
+    time_button3.clicked = False
+    time_button4.clicked = False
+    time_button5.clicked = False
+    time_button6.clicked = False
+    time_button7.clicked = False
+    time_button8.clicked = False
+    time_button9.clicked = False
+    time_button10.clicked = False
+    time_button11.clicked = False
+    time_button12.clicked = False
+
+    time_button1.bind("<Enter>", lambda event: date_btn_on(event, time_button1))
+    time_button1.bind("<Leave>", lambda event: date_btn_off(event, time_button1))
+    time_button1.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button1))
+    time_button2.bind("<Enter>", lambda event: date_btn_on(event, time_button2))
+    time_button2.bind("<Leave>", lambda event: date_btn_off(event, time_button2))
+    time_button2.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button2))
+    time_button3.bind("<Enter>", lambda event: date_btn_on(event, time_button3))
+    time_button3.bind("<Leave>", lambda event: date_btn_off(event, time_button3))
+    time_button3.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button3))
+    time_button4.bind("<Enter>", lambda event: date_btn_on(event, time_button4))
+    time_button4.bind("<Leave>", lambda event: date_btn_off(event, time_button4))
+    time_button4.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button4))
+    time_button5.bind("<Enter>", lambda event: date_btn_on(event, time_button5))
+    time_button5.bind("<Leave>", lambda event: date_btn_off(event, time_button5))
+    time_button5.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button5))
+    time_button6.bind("<Enter>", lambda event: date_btn_on(event, time_button6))
+    time_button6.bind("<Leave>", lambda event: date_btn_off(event, time_button6))
+    time_button6.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button6))
+    time_button7.bind("<Enter>", lambda event: date_btn_on(event, time_button7))
+    time_button7.bind("<Leave>", lambda event: date_btn_off(event, time_button7))
+    time_button7.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button7))
+    time_button8.bind("<Enter>", lambda event: date_btn_on(event, time_button8))
+    time_button8.bind("<Leave>", lambda event: date_btn_off(event, time_button8))
+    time_button8.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button8))
+    time_button9.bind("<Enter>", lambda event: date_btn_on(event, time_button9))
+    time_button9.bind("<Leave>", lambda event: date_btn_off(event, time_button9))
+    time_button9.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button9))
+    time_button10.bind("<Enter>", lambda event: date_btn_on(event, time_button10))
+    time_button10.bind("<Leave>", lambda event: date_btn_off(event, time_button10))
+    time_button10.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button10))
+    time_button11.bind("<Enter>", lambda event: date_btn_on(event, time_button11))
+    time_button11.bind("<Leave>", lambda event: date_btn_off(event, time_button11))
+    time_button11.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button11))
+    time_button12.bind("<Enter>", lambda event: date_btn_on(event, time_button12))
+    time_button12.bind("<Leave>", lambda event: date_btn_off(event, time_button12))
+    time_button12.bind("<Button-1>", lambda event: time_btn_clicked(event, time_button12))
 
     # Количество человек:
     people_label = Label(W, borderwidth=0, font=label_font, text="Выберите количество гостей",
@@ -496,7 +567,7 @@ if __name__ == "__main__":
 
     counter_img_bg = PhotoImage(file=Path(counter_bg))
     counter_block = Label(W, image=counter_img_bg, borderwidth=0, compound="center", bg=bg_peach_color,
-                          text="1", foreground=fg_b, font=global_font)
+                          text=str(user_selected_people_amount), foreground=fg_b, font=global_font)
 
     minus_img = PhotoImage(file=Path(minus_normal))
     minus_light_img = PhotoImage(file=Path(minus_light))
@@ -510,12 +581,14 @@ if __name__ == "__main__":
     plus_button = Button(W, image=plus_img, borderwidth=0,  # , command=next_win
                          compound="center", bg=fg_w, activebackground=fg_w)
 
-    minus_button.bind('<Enter>', minus_btn_on)
-    minus_button.bind('<Leave>', minus_btn_off)
-    minus_button.bind('<Button-1>', minus_btn_clicked)
-    plus_button.bind('<Enter>', plus_btn_on)
-    plus_button.bind('<Leave>', plus_btn_off)
-    plus_button.bind('<Button-1>', plus_btn_clicked)
+    minus_button.bind("<Enter>", minus_btn_on)
+    minus_button.bind("<Leave>", minus_btn_off)
+    minus_button.bind("<Button-1>", minus_btn_clicked)
+    plus_button.bind("<Enter>", plus_btn_on)
+    plus_button.bind("<Leave>", plus_btn_off)
+    plus_button.bind("<Button-1>", plus_btn_clicked)
+
+    minus_button["state"] = "disabled"
 
     # ====================== Третье окно ====================== (window5)
     menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите блюда",
