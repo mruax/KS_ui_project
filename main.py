@@ -372,13 +372,14 @@ def window5(event=None):
     additional_elements()
     add_arrows()
 
-    number_block.place(x=143, y=height - 24 - 88 - 90)
+    number_block.place(x=143, y=height - 24 - 88 - 110)
     menu_label.place(x=90, y=120)
 
     button_dish.place(x=23, y=200)
     button_drinks.place(x=260, y=200)
 
-    ...
+    card_dish_1.place(x=24, y=250 + 50)
+    card_dish_2.place(x=width - 24 - 217, y=250 + 50)
 
 
 def window6(event=None):
