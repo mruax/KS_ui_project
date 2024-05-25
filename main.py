@@ -301,31 +301,54 @@ def dd_plus_btn_clicked(event, button, side):
         counter_food_2["text"] = str(user_selected_dishes[user_selected_page][side])
 
 
-def buy_button_on(event, button):
-    button["image"] = image_buy_dark
+def buy_button_on(event, button, side):
+    global user_selected_dishes, user_selected_type
+    if user_selected_dishes[user_selected_type][side+2]:
+        button["image"] = image_check_dark
+    else:
+        button["image"] = image_buy_dark
 
 
-def buy_button_off(event, button):
-    button["image"] = image_buy
+def buy_button_off(event, button, side):
+    global user_selected_dishes, user_selected_type
+    if user_selected_dishes[user_selected_type][side + 2]:
+        button["image"] = image_check
+    else:
+        button["image"] = image_buy
 
 
-def buy_button_clicked(event, button):
-    pass
+def buy_button_clicked(event, button, side):
+    global user_selected_dishes, user_selected_type, image_check
+    if user_selected_dishes[user_selected_type][side + 2]:
+        user_selected_dishes[user_selected_type][side + 2] = False
+        button["image"] = image_check
+    else:
+        user_selected_dishes[user_selected_type][side + 2] = True
+        button["image"] = image_buy
 # ==============================================================
 
 
 # =================== Кнопки цифры =============================
 def number_button_on(event, button):
-    button['image'] = number_dark_img
+    if not button.clicked:
+        button['image'] = number_light_dark_img
+    else:
+        button['image'] = number_dark_img
     button['foreground'] = fg_w
 
 
 def number_button_off(event, button):
-    button['image'] = number_img
+    if not button.clicked:
+        button['image'] = number_light_img
+    else:
+        button['image'] = number_img
     button['foreground'] = fg_w
 
 
 def number_button_clicked(event, button):
+    if button.clicked:
+        return
+    button.clicked = True
     if user_selected_type == 1:
         pages = 5
     else:
@@ -335,7 +358,7 @@ def number_button_clicked(event, button):
             btn = globals().get(f"number_button_{page + 1}")
             if btn["text"] == button["text"]:
                 button["image"] = number_img
-                btn["foreground"] = fg_b
+                btn["foreground"] = fg_w
             else:
                 btn["image"] = number_light_img
                 btn["foreground"] = fg_w
@@ -775,8 +798,9 @@ if __name__ == "__main__":
     # Переменные:
     user_selected_page = 1
     user_selected_type = 1  # 1 - food, 2 - drinks
-    user_selected_dishes = [[0, 0], [0, 0], [0, 0], [0, 0]]
-    user_selected_drinks = [[0, 0], [0, 0], [0, 0]]
+    # amount1, amount2, confirmed1, confirmed2
+    user_selected_dishes = [[0, 0, False, False], [0, 0, False, False], [0, 0, False, False], [0, 0, False, False]]
+    user_selected_drinks = [[0, 0, False, False], [0, 0, False, False], [0, 0, False, False]]
 
     # Блюда:
     menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
@@ -855,17 +879,21 @@ if __name__ == "__main__":
     image_buy_dark = PhotoImage(file=Path(buy_dark))
     image_buy_light = PhotoImage(file=Path(buy_light))
 
+    image_check = PhotoImage(file=Path(check))
+    image_check_dark = PhotoImage(file=Path(check_dark))
+    image_check_light = PhotoImage(file=Path(check_light))
+
     button_buy_1 = Button(W, image=image_buy, borderwidth=0, compound="center", bg=bg_w,
                           activebackground=bg_w, foreground=fg_b, font=global_font, fg=fg_b)
     button_buy_2 = Button(W, image=image_buy, borderwidth=0, compound="center", bg=bg_w,
                           activebackground=bg_w, foreground=fg_b, font=global_font, fg=fg_b)
 
-    button_buy_1.bind("<Enter>", lambda event: buy_button_on(event, button_buy_1))
-    button_buy_1.bind("<Leave>", lambda event: buy_button_off(event, button_buy_1))
-    button_buy_1.bind("<Button-1>", lambda event: buy_button_clicked(event, button_buy_1))
-    button_buy_2.bind("<Enter>", lambda event: buy_button_on(event, button_buy_2))
-    button_buy_2.bind("<Leave>", lambda event: buy_button_off(event, button_buy_2))
-    button_buy_2.bind("<Button-1>", lambda event: buy_button_clicked(event, button_buy_2))
+    button_buy_1.bind("<Enter>", lambda event: buy_button_on(event, button_buy_1, side=0))
+    button_buy_1.bind("<Leave>", lambda event: buy_button_off(event, button_buy_1, side=0))
+    button_buy_1.bind("<Button-1>", lambda event: buy_button_clicked(event, button_buy_1, side=0))
+    button_buy_2.bind("<Enter>", lambda event: buy_button_on(event, button_buy_2, side=1))
+    button_buy_2.bind("<Leave>", lambda event: buy_button_off(event, button_buy_2, side=1))
+    button_buy_2.bind("<Button-1>", lambda event: buy_button_clicked(event, button_buy_2, side=1))
 
     image_bg_counter_food = PhotoImage(file=Path(bg_counter_food))
 
@@ -909,6 +937,8 @@ if __name__ == "__main__":
     number_img = PhotoImage(file=Path(number))
     number_light_img = PhotoImage(file=Path(number_light))
     number_dark_img = PhotoImage(file=Path(number_dark))
+    number_light_dark_img = PhotoImage(file=Path(number_light_dark))
+
     number_button_1 = Button(W, image=number_img, borderwidth=0, compound="center", bg=bg_w,
                              text="1", foreground=fg_w, font=global_font, activebackground=bg_w)
     number_button_2 = Button(W, image=number_light_img, borderwidth=0, compound="center", bg=bg_w,
@@ -930,7 +960,7 @@ if __name__ == "__main__":
     number_button_3.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_3))
     number_button_4.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_4))
 
-    number_button_1.clicked = False
+    number_button_1.clicked = True
     number_button_2.clicked = False
     number_button_3.clicked = False
     number_button_4.clicked = False
