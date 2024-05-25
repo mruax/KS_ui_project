@@ -720,6 +720,7 @@ if __name__ == "__main__":
                          foreground=fg_b, font=global_font)
     button_dish.clicked = True
     button_drinks.clicked = False
+
     
 
     # ====================== Вызовы окон ======================
