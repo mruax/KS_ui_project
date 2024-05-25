@@ -230,6 +230,24 @@ def button_dd_clicked(event, button):
 # ==============================================================
 
 
+# =================== Кнопки цифры =============================
+def number_button_1_on(event):
+    number_button_1['image'] = number_dark
+
+
+def number_button_2_on(event):
+    number_button_2['image'] = number_dark
+
+
+def number_button_3_on(event):
+    number_button_3['image'] = number_dark
+
+
+def number_button_4_on(event):
+    number_button_4['image'] = number_dark
+# ==============================================================
+
+
 def clearing_w_start():
     """
     Удаление всех виджетов из окна.
@@ -372,18 +390,21 @@ def window5(event=None):
     additional_elements()
     add_arrows()
 
-    number_block.place(x=143, y=height - 24 - 88 - 110)
+    number_block.place(x=(width - 214) // 2, y=height - 24 - 88 - 90)
+    number_button_1.place(x=(width - 214 + 2 + 6) // 2, y=height - 24 - 88 - 90 + 2)
+    number_button_2.place(x=(width - 82) // 2, y=height - 24 - 88 - 90 + 2)
+    number_button_3.place(x=(width + 30) // 2, y=height - 24 - 88 - 90 + 2)
+    number_button_4.place(x=(width + 214 - 72) // 2, y=height - 24 - 88 - 90 + 2)
+
     menu_label.place(x=90, y=120)
 
     button_dish.place(x=23, y=200)
     button_drinks.place(x=260, y=200)
 
-    # card_dish_1.place(x=24, y=250 + 50)
-    # card_dish_2.place(x=width - 24 - 217, y=250 + 50)
     card_dish_1.place(x=24, y=250 + 50)
     card_dish_2.place(x=width - 24 - 217, y=250 + 50)
-    card_dish_1.place(x=24, y=250 + 50)
-    card_dish_2.place(x=width - 24 - 217, y=250 + 50)
+
+
 
 
 def window6(event=None):
@@ -725,6 +746,47 @@ if __name__ == "__main__":
     button_dish.clicked = True
     button_drinks.clicked = False
 
+    number = PhotoImage(file=Path(number))
+    number_light = PhotoImage(file=Path(number_light))
+    number_dark = PhotoImage(file=Path(number_dark))
+
+    number_button_1 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="1",
+                          foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_light_1 = Button(W, image=number_light, borderwidth=0, compound="center", bg=bg_w, text="1",
+                          foreground=fg_b, font=global_font, activebackground=bg_w)
+    number_button_dark_1 = Button(W, image=number_dark, borderwidth=0, compound="center", bg=bg_w, text="1",
+                          foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_2 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="2",
+                             foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_light_2 = Button(W, image=number_light, borderwidth=0, compound="center", bg=bg_w, text="2",
+                                   foreground=fg_b, font=global_font, activebackground=bg_w)
+    number_button_dark_2 = Button(W, image=number_dark, borderwidth=0, compound="center", bg=bg_w, text="2",
+                                  foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_3 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="3",
+                             foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_light_3 = Button(W, image=number_light, borderwidth=0, compound="center", bg=bg_w, text="3",
+                                   foreground=fg_b, font=global_font, activebackground=bg_w)
+    number_button_dark_3 = Button(W, image=number_dark, borderwidth=0, compound="center", bg=bg_w, text="3",
+                                  foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_4 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="4",
+                             foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_light_4 = Button(W, image=number_light, borderwidth=0, compound="center", bg=bg_w, text="4",
+                                   foreground=fg_b, font=global_font, activebackground=bg_w)
+    number_button_dark_4 = Button(W, image=number_dark, borderwidth=0, compound="center", bg=bg_w, text="4",
+                                  foreground=fg_w, font=global_font, activebackground=bg_w)
+
+    number_button_1.bind('<Enter>', number_button_1_on)
+    number_button_2.bind('<Enter>', number_button_2_on)
+    number_button_3.bind('<Enter>', number_button_3_on)
+    number_button_4.bind('<Enter>', number_button_4_on)
+    # number_button_1.bind('<Enter>', number_button_1_off)
+    # number_button_2.bind('<Enter>', number_button_2_off)
+    # number_button_3.bind('<Enter>', number_button_3_off)
+    # number_button_4.bind('<Enter>', number_button_4_off)
+    # number_button_1.bind("<Button-1>", number_button_1_clicked)
+    # number_button_2.bind("<Button-1>", number_button_2_clicked)
+    # number_button_3.bind("<Button-1>", number_button_3_clicked)
+    # number_button_4.bind("<Button-1>", number_button_4_clicked)
 
 
     # ====================== Вызовы окон ======================
