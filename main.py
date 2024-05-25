@@ -378,12 +378,19 @@ def window5(event=None):
     button_dish.place(x=23, y=200)
     button_drinks.place(x=260, y=200)
 
-    # card_dish_1.place(x=24, y=250 + 50)
-    # card_dish_2.place(x=width - 24 - 217, y=250 + 50)
     card_dish_1.place(x=24, y=250 + 50)
+    button_buy_1.place(x=24 + 8 + 105 + 8, y=250 + 50 + 335)
+    counter_food_1.place(x=24 + 8, y=250 + 50 + 335 - 8 - 36)
+    food_minus_button_1.place(x=24 + 8 + 4 + 2, y=250 + 50 + 335 - 8 - 36 + 4 + 1)
+    food_plus_button_1.place(x=24 + 8 + 3 + 137 + 24 + 5 - 1, y=250 + 50 + 335 - 8 - 36 + 4)
+
+
     card_dish_2.place(x=width - 24 - 217, y=250 + 50)
-    card_dish_1.place(x=24, y=250 + 50)
-    card_dish_2.place(x=width - 24 - 217, y=250 + 50)
+    button_buy_2.place(x=width - 32 - 88, y=250 + 50 + 335)
+    counter_food_2.place(x=width - 32 - 201, y=250 + 50 + 335 - 8 - 36)
+    food_minus_button_2.place(x=width - 36 - 201 + 8 + 2, y=250 + 50 + 335 - 8 - 36 + 4)
+    food_plus_button_2.place(x=width - 32 - 28 - 4 - 1, y=250 + 50 + 335 - 8 - 36 + 4)
+
 
 
 def window6(event=None):
@@ -413,6 +420,7 @@ if __name__ == "__main__":
     label_green_color = rgbtohex(r=109, g=191, b=102)  # светло-зеленый
     bg_peach_color = rgbtohex(r=252, g=240, b=227)  # персиковый
     fg_brown_color = rgbtohex(r=119, g=55, b=8)  # коричневый с лого
+    bg_light_gray_color = rgbtohex(r=239, g=239, b=239)  # светло-серый с карточки
     # fg_b = fg_brown_color
     # label_green_color = fg_brown_color
 
@@ -653,7 +661,10 @@ if __name__ == "__main__":
     # Переменные:
     user_selected_page = 1
     user_selected_type = 1  # 1 - food, 2 - drinks
+    user_selected_dishes = [[0, 0], [0, 0], [0, 0], [0, 0]]
+    user_selected_drinks = [[0, 0], [0, 0], [0, 0]]
 
+    # Блюда:
     menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
                        fg=label_green_color, bg=bg_peach_color)
 
@@ -667,10 +678,10 @@ if __name__ == "__main__":
     button_fd_light = PhotoImage(file=Path(fd_button_light))
     button_fd_dark = PhotoImage(file=Path(fd_button_dark))
 
-    button_dish = Label(W, image=button_fd, borderwidth=0, compound="center", bg=bg_peach_color,
-                        text="Блюда", foreground=fg_b, font=global_font, fg=fg_b)
-    button_drinks = Label(W, image=button_dd, borderwidth=0, compound="center", bg=bg_peach_color,
-                          text="Напитки", foreground=fg_b, font=global_font, fg=fg_w)
+    button_dish = Button(W, image=button_fd, borderwidth=0, compound="center", bg=bg_peach_color,
+                         activebackground=bg_peach_color, text="Блюда", foreground=fg_b, font=global_font, fg=fg_b)
+    button_drinks = Button(W, image=button_dd, borderwidth=0, compound="center", bg=bg_peach_color,
+                           activebackground=bg_peach_color, text="Напитки", foreground=fg_b, font=global_font, fg=fg_w)
 
     button_dish.bind('<Enter>', lambda event: button_dd_on(event, button_dish))
     button_dish.bind('<Leave>', lambda event: button_dd_off(event, button_dish))
@@ -725,7 +736,55 @@ if __name__ == "__main__":
     button_dish.clicked = True
     button_drinks.clicked = False
 
+    image_buy = PhotoImage(file=Path(buy))
+    image_buy_dark = PhotoImage(file=Path(buy_dark))
+    image_buy_light = PhotoImage(file=Path(buy_light))
 
+    button_buy_1 = Button(W, image=image_buy, borderwidth=0, compound="center", bg=bg_w,
+                          activebackground=bg_w, foreground=fg_b, font=global_font, fg=fg_b)
+    button_buy_2 = Button(W, image=image_buy, borderwidth=0, compound="center", bg=bg_w,
+                          activebackground=bg_w, foreground=fg_b, font=global_font, fg=fg_b)
+
+    image_bg_counter_food = PhotoImage(file=Path(bg_counter_food))
+
+    counter_food_1 = Label(W, image=image_bg_counter_food, borderwidth=0, compound="center",
+                           bg=bg_w, foreground=fg_b, font=global_font, text="0")
+    counter_food_2 = Label(W, image=image_bg_counter_food, borderwidth=0, compound="center",
+                           bg=bg_w, foreground=fg_b, font=global_font, text="0")
+
+    food_minus_img = PhotoImage(file=Path(food_minus_normal))
+    food_minus_light_img = PhotoImage(file=Path(food_minus_light))
+    food_minus_dark_img = PhotoImage(file=Path(food_minus_dark))
+    food_plus_img = PhotoImage(file=Path(food_plus_normal))
+    food_plus_light_img = PhotoImage(file=Path(food_plus_light))
+    food_plus_dark_img = PhotoImage(file=Path(food_plus_dark))
+
+    food_minus_button_1 = Button(W, image=food_minus_img, borderwidth=0,  # , command=next_win
+                                 compound="center", bg=bg_light_gray_color, activebackground=bg_light_gray_color)
+    food_plus_button_1 = Button(W, image=food_plus_img, borderwidth=0,  # , command=next_win
+                                compound="center", bg=bg_light_gray_color, activebackground=bg_light_gray_color)
+    food_minus_button_2 = Button(W, image=food_minus_img, borderwidth=0,  # , command=next_win
+                                 compound="center", bg=bg_light_gray_color, activebackground=bg_light_gray_color)
+    food_plus_button_2 = Button(W, image=food_plus_img, borderwidth=0,  # , command=next_win
+                                compound="center", bg=bg_light_gray_color, activebackground=bg_light_gray_color)
+
+    food_minus_button_1.bind("<Enter>", minus_btn_on)
+    food_minus_button_1.bind("<Leave>", minus_btn_off)
+    food_minus_button_1.bind("<Button-1>", minus_btn_clicked)
+    food_minus_button_2.bind("<Enter>", minus_btn_on)
+    food_minus_button_2.bind("<Leave>", minus_btn_off)
+    food_minus_button_2.bind("<Button-1>", minus_btn_clicked)
+    food_plus_button_1.bind("<Enter>", plus_btn_on)
+    food_plus_button_1.bind("<Leave>", plus_btn_off)
+    food_plus_button_1.bind("<Button-1>", plus_btn_clicked)
+    food_plus_button_2.bind("<Enter>", plus_btn_on)
+    food_plus_button_2.bind("<Leave>", plus_btn_off)
+    food_plus_button_2.bind("<Button-1>", plus_btn_clicked)
+
+
+
+    food_minus_button_1["state"] = "disabled"
+    food_minus_button_2["state"] = "disabled"
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
