@@ -312,6 +312,26 @@ def buy_button_off(event, button):
 # ==============================================================
 
 
+# =================== Кнопки цифры =============================
+def number_button_on(event, button):
+    global user_selected_page, user_selected_type
+    button['image'] = number_dark
+    button['foreground'] = fg_w
+
+
+def number_button_off(event, button):
+    global user_selected_page, user_selected_type
+    button['image'] = number
+    button['foreground'] = fg_w
+
+
+def number_button_clicked(event, button):
+    global user_selected_page, user_selected_type
+    button['image'] = number_light
+    button['foreground'] = fg_b
+# ==============================================================
+
+
 def clearing_w_start():
     """
     Удаление всех виджетов из окна.
@@ -454,7 +474,7 @@ def window5(event=None):
     additional_elements()
     add_arrows()
 
-    number_block.place(x=143, y=height - 24 - 88 - 110)
+    number_block.place(x=143, y=height - 24 - 88 - 90)
     menu_label.place(x=90, y=120)
 
     button_dish.place(x=23, y=200)
@@ -472,6 +492,10 @@ def window5(event=None):
     food_minus_button_2.place(x=width - 36 - 201 + 8 + 2, y=250 + 50 + 335 - 8 - 36 + 4)
     food_plus_button_2.place(x=width - 32 - 28 - 4 - 1, y=250 + 50 + 335 - 8 - 36 + 4)
 
+    number_button_1.place(x=(width - 214 + 2 + 6) // 2, y=height - 24 - 88 - 90 + 2)
+    number_button_2.place(x=(width - 90) // 2, y=height - 24 - 88 - 90 + 2)
+    number_button_3.place(x=(width + 26) // 2, y=height - 24 - 88 - 90 + 2)
+    number_button_4.place(x=(width + 214 - 72) // 2, y=height - 24 - 88 - 90 + 2)
 
 
 def window6(event=None):
@@ -872,6 +896,30 @@ if __name__ == "__main__":
 
     food_minus_button_1["state"] = "disabled"
     food_minus_button_2["state"] = "disabled"
+
+    number = PhotoImage(file=Path(number))
+    number_light = PhotoImage(file=Path(number_light))
+    number_dark = PhotoImage(file=Path(number_dark))
+    number_button_1 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="1", foreground=fg_w,
+                             font=global_font, activebackground=bg_w)
+    number_button_2 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="2", foreground=fg_w,
+                             font=global_font, activebackground=bg_w)
+    number_button_3 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="3", foreground=fg_w,
+                             font=global_font, activebackground=bg_w)
+    number_button_4 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="4", foreground=fg_w,
+                             font=global_font, activebackground=bg_w)
+    number_button_1.bind("<Enter>", lambda event: number_button_on(event, number_button_1))
+    number_button_2.bind("<Enter>", lambda event: number_button_on(event, number_button_2))
+    number_button_3.bind("<Enter>", lambda event: number_button_on(event, number_button_3))
+    number_button_4.bind("<Enter>", lambda event: number_button_on(event, number_button_4))
+    number_button_1.bind("<Leave>", lambda event: number_button_off(event, number_button_1))
+    number_button_2.bind("<Leave>", lambda event: number_button_off(event, number_button_2))
+    number_button_3.bind("<Leave>", lambda event: number_button_off(event, number_button_3))
+    number_button_4.bind("<Leave>", lambda event: number_button_off(event, number_button_4))
+    number_button_1.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_1))
+    number_button_2.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_2))
+    number_button_3.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_3))
+    number_button_4.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_4))
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
