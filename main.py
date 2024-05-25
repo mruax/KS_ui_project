@@ -349,7 +349,7 @@ def window5(event=None):
     additional_elements()
     add_arrows()
 
-    number_block.place(x=143, y=760)
+    number_block.place(x=143, y=height - 24 - 88 - 100)
     menu_label.place(x=90, y=120)
 
     button_dish.place(x=23, y=200)
