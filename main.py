@@ -261,7 +261,7 @@ def additional_elements(event=None):
     :return: None
     """
     background_label.place(x=0, y=0)
-    logo_label.place(x=36, y=44)
+    logo_label.place(x=36, y=50)
 
 
 def add_arrows(event=None):
@@ -350,7 +350,7 @@ def window5(event=None):
     add_arrows()
 
     number_block.place(x=143, y=760)
-    menu_label.place(x=132, y=120)
+    menu_label.place(x=90, y=120)
 
     button_dish.place(x=23, y=200)
     button_drinks.place(x=260, y=200)
@@ -366,10 +366,10 @@ def window6(event=None):
     add_arrows()
 
     number_block.place(x=143, y=760)
-    menu_label.place(x=132, y=120)
+    menu_label.place(x=132, y=100)
 
-    button_dish.place(x=23, y=200)
-    button_drinks.place(x=260, y=200)
+    button_dish.place(x=23, y=150)
+    button_drinks.place(x=260, y=150)
 
     ...
 
