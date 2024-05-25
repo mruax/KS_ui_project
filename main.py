@@ -372,7 +372,7 @@ def window5(event=None):
     additional_elements()
     add_arrows()
 
-    number_block.place(x=143, y=height - 24 - 88 - 100 )
+    number_block.place(x=143, y=height - 24 - 88 - 90)
     menu_label.place(x=90, y=120)
 
     button_dish.place(x=23, y=200)
@@ -407,6 +407,9 @@ if __name__ == "__main__":
     # Доп цвета:
     label_green_color = rgbtohex(r=109, g=191, b=102)  # светло-зеленый
     bg_peach_color = rgbtohex(r=252, g=240, b=227)  # персиковый
+    fg_brown_color = rgbtohex(r=119, g=55, b=8)  # коричневый с лого
+    # fg_b = fg_brown_color
+    # label_green_color = fg_brown_color
 
     # ====================== Стартовое окно ====================== (window1)
     W = Tk()
