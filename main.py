@@ -175,6 +175,7 @@ def minus_btn_clicked(event):
         minus_button["state"] = "disabled"
     else:
         minus_button["state"] = "active"
+    plus_button["image"] = plus_img
     plus_button["state"] = "active"
     counter_block["text"] = str(user_selected_people_amount)
 
@@ -200,6 +201,7 @@ def plus_btn_clicked(event):
         plus_button["state"] = "disabled"
     else:
         plus_button["state"] = "active"
+    minus_button["image"] = minus_img
     minus_button["state"] = "active"
     counter_block["text"] = str(user_selected_people_amount)
 # ===============================================================
@@ -300,35 +302,46 @@ def dd_plus_btn_clicked(event, button, side):
 
 
 def buy_button_on(event, button):
-    pass
+    button["image"] = image_buy_dark
 
 
 def buy_button_off(event, button):
-    pass
+    button["image"] = image_buy
 
 
-def buy_button_off(event, button):
+def buy_button_clicked(event, button):
     pass
 # ==============================================================
 
 
 # =================== Кнопки цифры =============================
 def number_button_on(event, button):
-    global user_selected_page, user_selected_type
-    button['image'] = number_dark
+    button['image'] = number_dark_img
     button['foreground'] = fg_w
 
 
 def number_button_off(event, button):
-    global user_selected_page, user_selected_type
-    button['image'] = number
+    button['image'] = number_img
     button['foreground'] = fg_w
 
 
 def number_button_clicked(event, button):
-    global user_selected_page, user_selected_type
-    button['image'] = number_light
-    button['foreground'] = fg_b
+    if user_selected_type == 1:
+        pages = 5
+    else:
+        pages = 4
+    for page in range(pages):
+        try:
+            btn = globals().get(f"number_button_{page + 1}")
+            if btn["text"] == button["text"]:
+                button["image"] = number_img
+                btn["foreground"] = fg_b
+            else:
+                btn["image"] = number_light_img
+                btn["foreground"] = fg_w
+                btn.clicked = False
+        except Exception as e:
+            pass
 # ==============================================================
 
 
@@ -851,12 +864,12 @@ if __name__ == "__main__":
     button_buy_2 = Button(W, image=image_buy, borderwidth=0, compound="center", bg=bg_w,
                           activebackground=bg_w, foreground=fg_b, font=global_font, fg=fg_b)
 
-    button_buy_1.bind("<Enter>", lambda event: dd_minus_btn_on(event, food_minus_button_1))
-    button_buy_1.bind("<Leave>", lambda event: dd_minus_btn_off(event, food_minus_button_1))
-    button_buy_1.bind("<Button-1>", lambda event: dd_minus_btn_clicked(event, food_minus_button_1, side=0))
-    button_buy_2.bind("<Enter>", lambda event: dd_minus_btn_on(event, food_minus_button_2))
-    button_buy_2.bind("<Leave>", lambda event: dd_minus_btn_off(event, food_minus_button_2))
-    button_buy_2.bind("<Button-1>", lambda event: dd_minus_btn_clicked(event, food_minus_button_2, side=1))
+    button_buy_1.bind("<Enter>", lambda event: buy_button_on(event, button_buy_1))
+    button_buy_1.bind("<Leave>", lambda event: buy_button_off(event, button_buy_1))
+    button_buy_1.bind("<Button-1>", lambda event: buy_button_clicked(event, button_buy_1))
+    button_buy_2.bind("<Enter>", lambda event: buy_button_on(event, button_buy_2))
+    button_buy_2.bind("<Leave>", lambda event: buy_button_off(event, button_buy_2))
+    button_buy_2.bind("<Button-1>", lambda event: buy_button_clicked(event, button_buy_2))
 
     image_bg_counter_food = PhotoImage(file=Path(bg_counter_food))
 
@@ -897,17 +910,17 @@ if __name__ == "__main__":
     food_minus_button_1["state"] = "disabled"
     food_minus_button_2["state"] = "disabled"
 
-    number = PhotoImage(file=Path(number))
-    number_light = PhotoImage(file=Path(number_light))
-    number_dark = PhotoImage(file=Path(number_dark))
-    number_button_1 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="1", foreground=fg_w,
-                             font=global_font, activebackground=bg_w)
-    number_button_2 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="2", foreground=fg_w,
-                             font=global_font, activebackground=bg_w)
-    number_button_3 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="3", foreground=fg_w,
-                             font=global_font, activebackground=bg_w)
-    number_button_4 = Button(W, image=number, borderwidth=0, compound="center", bg=bg_w, text="4", foreground=fg_w,
-                             font=global_font, activebackground=bg_w)
+    number_img = PhotoImage(file=Path(number))
+    number_light_img = PhotoImage(file=Path(number_light))
+    number_dark_img = PhotoImage(file=Path(number_dark))
+    number_button_1 = Button(W, image=number_img, borderwidth=0, compound="center", bg=bg_w,
+                             text="1", foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_2 = Button(W, image=number_light_img, borderwidth=0, compound="center", bg=bg_w,
+                             text="2", foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_3 = Button(W, image=number_light_img, borderwidth=0, compound="center", bg=bg_w,
+                             text="3", foreground=fg_w, font=global_font, activebackground=bg_w)
+    number_button_4 = Button(W, image=number_light_img, borderwidth=0, compound="center", bg=bg_w,
+                             text="4", foreground=fg_w, font=global_font, activebackground=bg_w)
     number_button_1.bind("<Enter>", lambda event: number_button_on(event, number_button_1))
     number_button_2.bind("<Enter>", lambda event: number_button_on(event, number_button_2))
     number_button_3.bind("<Enter>", lambda event: number_button_on(event, number_button_3))
@@ -920,6 +933,14 @@ if __name__ == "__main__":
     number_button_2.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_2))
     number_button_3.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_3))
     number_button_4.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_4))
+
+    number_button_1.clicked = False
+    number_button_2.clicked = False
+    number_button_3.clicked = False
+    number_button_4.clicked = False
+
+
+
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
