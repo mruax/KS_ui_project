@@ -34,18 +34,23 @@ def change_color_start(event=None):
 
 # ======================== Кнопка вперед ========================
 def on_forward(event=None):
-    forward_button["image"] = arrow_forward_dark_img
-    forward_button["foreground"] = fg_w
+    if forward_button["state"] != "disabled":
+        forward_button["image"] = arrow_forward_dark_img
+        forward_button["foreground"] = fg_w
 
 
 def off_forward(event=None):
-    forward_button["image"] = arrow_forward_img
-    forward_button["foreground"] = fg_w
+    if forward_button["state"] != "disabled":
+        forward_button["image"] = arrow_forward_img
+        forward_button["foreground"] = fg_w
 
 
 def change_color_forward(event=None):
-    forward_button["image"] = arrow_forward_light_img
-    forward_button["foreground"] = fg_b
+    if forward_button["state"] != "disabled":
+        forward_button["image"] = arrow_forward_light_img
+        forward_button["foreground"] = fg_b
+    else:
+        forward_button["foreground"] = fg_w
 # ===============================================================
 
 
@@ -117,6 +122,8 @@ def select_date(event, button):
             window3()
     elif not button.clicked:
         user_selected_date = None
+    else:
+        user_selected_date = button["text"]
 # ===============================================================
 
 
@@ -154,6 +161,8 @@ def select_time(event, button):
             window4()
     elif not button.clicked:
         user_selected_time = None
+    else:
+        user_selected_time = button["text"]
 # ===============================================================
 
 
@@ -463,6 +472,11 @@ def radiobutton_off(event, button):
 
 
 def radiobutton_clicked(event, button):
+    global user_selected_preferences
+    # forward_button["state"] = "active"
+    # forward_button["image"] = arrow_forward_img
+    # forward_button["foreground"] = fg_w
+
     if not button.clicked:
         button.clicked = True
     for radio in range(5):
@@ -470,6 +484,8 @@ def radiobutton_clicked(event, button):
             btn = globals().get(f"radiobutton_{radio + 1}")
             if btn != button:
                 btn.clicked = False
+            else:
+                user_selected_preferences = radio + 1
         except Exception as e:
             pass
 
@@ -638,6 +654,25 @@ def check_cart(event=None):
         button_buy_2["image"] = image_buy
 
 
+def get_summ(event=None):
+    global user_selected_dishes, user_selected_drinks, user_selected_type, user_selected_dishes_backup
+    summ = 0
+    if user_selected_type == 2:
+        user_selected_drinks = copy.deepcopy(user_selected_dishes)
+        user_selected_dishes = copy.deepcopy(user_selected_dishes_backup)
+        user_selected_dishes_backup = copy.deepcopy(user_selected_drinks)
+    for i in range(4):
+        if user_selected_dishes[i][2]:
+            summ += user_selected_dishes[i][0] * menu_dishes_prices[i * 2]
+        if user_selected_dishes[i][3]:
+            summ += user_selected_dishes[i][1] * menu_dishes_prices[i * 2 + 1]
+        if user_selected_drinks[i][2]:
+            summ += user_selected_drinks[i][0] * menu_drinks_prices[i * 2]
+        if user_selected_drinks[i][3]:
+            summ += user_selected_drinks[i][1] * menu_drinks_prices[i * 2 + 1]
+    return summ
+
+
 def window1(event=None):
     """
     Размещает элементы интерфейса n-нного окна.
@@ -717,7 +752,7 @@ def window5(event=None):
     window_number = 5
     clearing_w_start()
     additional_elements()
-    add_arrows()
+    # add_arrows()
 
     number_block.place(x=143, y=height - 24 - 88 - 83)
     menu_label.place(x=90, y=120)
@@ -744,7 +779,9 @@ def window5(event=None):
     number_button_4.place(x=(width + 214 - 72) // 2, y=height - 24 - 88 - 83 + 2)
 
     back_button["state"] = "active"
-    back_button["image"] = arrow_back_img
+    # forward_button["state"] = "active"
+    # forward_button["text"] = "ДАЛЕЕ"
+    add_arrows()
 
 
 def window6(event=None):
@@ -773,6 +810,8 @@ def window6(event=None):
     label_wish_2.place(x=28, y=785)
 
     forward_button["text"] = "ДАЛЕЕ"
+    # if not user_selected_preferences:
+    #     forward_button["state"] = "disabled"
 
 
 def window7(event=None):
@@ -799,9 +838,24 @@ def window7(event=None):
     people_block.place(x=180 + 234 - 102, y=412)
     amount_block.place(x=180 + 234 - 102, y=465)
 
+    # data_block["text"] = str(user_selected_date)
+    # time_block["text"] = str(user_selected_time)
+    # people_block["text"] = str(user_selected_people_amount)
+    # amount_block["text"] = str(get_summ())
 
+    data1 = Label(W, borderwidth=0, font=global_font, text=str(user_selected_date),
+                  fg=fg_b, bg=bg_light_gray_color)
+    time1 = Label(W, borderwidth=0, font=global_font, text=str(user_selected_time),
+                  fg=fg_b, bg=bg_light_gray_color)
+    people1 = Label(W, borderwidth=0, font=global_font, text=str(user_selected_people_amount),
+                    fg=fg_b, bg=bg_light_gray_color)
+    amount1 = Label(W, borderwidth=0, font=global_font, text=str(get_summ()),
+                    fg=fg_b, bg=bg_light_gray_color)
 
-
+    data1.place(x=180 + 10, y=307 + 15)
+    time1.place(x=180 + 10, y=360 + 15)
+    people1.place(x=180 + 234 - 102 + 10, y=412 + 15)
+    amount1.place(x=180 + 234 - 102 + 10, y=465 + 15)
 
 def window8(event=None):
     """
@@ -1089,6 +1143,8 @@ if __name__ == "__main__":
     user_selected_dishes_backup = [[1, 1, False, False], [1, 1, False, False],
                                    [1, 1, False, False], [1, 1, False, False]]
     user_selected_drinks = [[1, 1, False, False], [1, 1, False, False], [1, 1, False, False], [1, 1, False, False]]
+    menu_dishes_prices = [950, 440, 930, 650, 360, 400, 350, 420]  # to settings
+    menu_drinks_prices = [720, 600, 370, 3500, 3000, 5500, 3500, 450]  # to settings
 
     # Блюда:
     menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
@@ -1337,6 +1393,7 @@ if __name__ == "__main__":
     time_or_date_block_bg = PhotoImage(file=Path(time_or_date_block))
 
     info_block = Label(W, bg=bg_peach_color, image=info_block_bg)
+
     people_block = Label(W, bg=bg_w, image=people_or_amount_block_bg)
     amount_block = Label(W, bg=bg_w, image=people_or_amount_block_bg)
     time_block = Label(W, bg=bg_w, image=time_or_date_block_bg)
@@ -1345,15 +1402,13 @@ if __name__ == "__main__":
     confirmation = Label(W, borderwidth=0, font=label_font, text="Подтверждение",
                          fg=label_green_color, bg=bg_peach_color)
     data = Label(W, borderwidth=0, font=global_font, text="Дата:",
-                         fg=label_green_color, bg=bg_w)
+                 fg=label_green_color, bg=bg_w)
     time = Label(W, borderwidth=0, font=global_font, text="Время:",
-                         fg=label_green_color, bg=bg_w)
+                 fg=label_green_color, bg=bg_w)
     people = Label(W, borderwidth=0, font=global_font, text="Количество гостей:",
-                         fg=label_green_color, bg=bg_w)
+                   fg=label_green_color, bg=bg_w)
     amount = Label(W, borderwidth=0, font=global_font, text="Итоговая стоимость:",
                    fg=label_green_color, bg=bg_w)
-
-    ...
 
     # ===================== Шестое окно ======================= (window8)
     entry_image = PhotoImage(file=Path(inputfield2))
