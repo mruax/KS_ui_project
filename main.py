@@ -1,9 +1,11 @@
-from tkinter import *
-from tkinter.ttk import Frame
-from pathlib import Path
-
-from settings import *
 import copy
+import os
+from pathlib import Path
+from tkinter import *
+
+from check import *
+from menu import *
+from settings import *
 
 
 def rgbtohex(r, g, b):
@@ -534,10 +536,67 @@ def check_button_off(event=None):
 
 
 def check_button_clicked(event=None):
+    global user_selected_time, user_selected_date, user_selected_dishes, user_selected_drinks, user_selected_preferences
     check_button["image"] = img_button_prefinish_light
+
+    date = str(user_selected_date)
+    time = str(user_selected_time)
+    people = str(user_selected_people_amount)
+    username = str(fio_entry.get())
+    email = str(email_entry.get())
+    number = str(number_entry.get())
+    items = []
+    for i in range(4):
+        if user_selected_dishes[i][2]:
+            item = {"name": str(menu_dishes_names[i * 2]),
+                    "price": str(menu_dishes_prices[i * 2]),
+                    "amount": str(user_selected_dishes[i][0]),
+                    "total": str(int(menu_dishes_prices[i * 2]) * int(user_selected_dishes[i][0]))
+                    }
+            items.append(item)
+        if user_selected_dishes[i][3]:
+            item = {"name": str(menu_dishes_names[i * 2 + 1]),
+                    "price": str(menu_dishes_prices[i * 2 + 1]),
+                    "amount": str(user_selected_dishes[i][1]),
+                    "total": str(int(menu_dishes_prices[i * 2 + 1]) * int(user_selected_dishes[i][1]))
+                    }
+            items.append(item)
+        if user_selected_drinks[i][2]:
+            item = {"name": str(menu_drinks_names[i * 2]),
+                    "price": str(menu_drinks_prices[i * 2]),
+                    "amount": str(user_selected_drinks[i][0]),
+                    "total": str(int(menu_drinks_prices[i * 2]) * int(user_selected_drinks[i][0]))
+                    }
+            items.append(item)
+        if user_selected_drinks[i][3]:
+            item = {"name": str(menu_drinks_names[i * 2 + 1]),
+                    "price": str(menu_drinks_prices[i * 2 + 1]),
+                    "amount": str(user_selected_drinks[i][0]),
+                    "total": str(int(menu_drinks_prices[i * 2 + 1]) * int(user_selected_drinks[i][1]))
+                    }
+            items.append(item)
+    total = str(get_summ())
+    preferences = user_selected_preferences
+    match preferences:
+        case 1:
+            preferences = "Столик на день рождения"
+        case 2:
+            preferences = "Столик для свидания"
+        case 3:
+            preferences = "Столик на свадьбу"
+        case 4:
+            preferences = "Пожеланий нет"
+        case 5:
+            preferences = field_wish.get()
+        case _:
+            preferences = "Пожеланий нет"
+
+    file_name = set_template(date, time, people, username, email, number, items, total, preferences)
+    os.startfile(Path(file_name))
     exit()
 
 # ===============================================================
+
 
 def clearing_w_start():
     """
@@ -872,6 +931,7 @@ def window7(event=None):
     people1.place(x=180 + 234 - 102 + 10, y=412 + 15)
     amount1.place(x=180 + 234 - 102 + 10, y=465 + 15)
 
+
 def window8(event=None):
     """
     Окно с энтраями.
@@ -1167,8 +1227,7 @@ if __name__ == "__main__":
     user_selected_dishes_backup = [[1, 1, False, False], [1, 1, False, False],
                                    [1, 1, False, False], [1, 1, False, False]]
     user_selected_drinks = [[1, 1, False, False], [1, 1, False, False], [1, 1, False, False], [1, 1, False, False]]
-    menu_dishes_prices = [950, 440, 930, 650, 360, 400, 350, 420]  # to settings
-    menu_drinks_prices = [720, 600, 370, 3500, 3000, 5500, 3500, 450]  # to settings
+
 
     # Блюда:
     menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
@@ -1447,18 +1506,18 @@ if __name__ == "__main__":
 
     canvas3 = Canvas(W, width=400, height=52, background=bg_peach_color, borderwidth=0)
     canvas3.pack()
-    fio_label = Label(W, bg=bg_peach_color, image=entry_image)
-    canvas3.create_window(200, 26, window=fio_label, width=400, height=60)
-    fio_entry = Entry(W, borderwidth=0, font=global_font2)
-    canvas3.create_window(200, 26, window=fio_entry, width=380, height=45)
+    number_label = Label(W, bg=bg_peach_color, image=entry_image)
+    canvas3.create_window(200, 26, window=number_label, width=400, height=60)
+    number_entry = Entry(W, borderwidth=0, font=global_font2)
+    canvas3.create_window(200, 26, window=number_entry, width=380, height=45)
     canvas3.place(x=-300, y=-300)
 
     canvas4 = Canvas(W, width=400, height=52, background=bg_peach_color, borderwidth=0)
     canvas4.pack()
-    fio_label = Label(W, bg=bg_peach_color, image=entry_image)
-    canvas4.create_window(200, 26, window=fio_label, width=400, height=60)
-    fio_entry = Entry(W, borderwidth=0, font=global_font2)
-    canvas4.create_window(200, 26, window=fio_entry, width=380, height=45)
+    email_label = Label(W, bg=bg_peach_color, image=entry_image)
+    canvas4.create_window(200, 26, window=email_label, width=400, height=60)
+    email_entry = Entry(W, borderwidth=0, font=global_font2)
+    canvas4.create_window(200, 26, window=email_entry, width=380, height=45)
     canvas4.place(x=-300, y=-300)
 
     w8_fio_label = Label(W, borderwidth=0, font=global_font, text="Введите Ваше ФИО",
