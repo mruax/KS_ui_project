@@ -705,20 +705,23 @@ def window6(event=None):
     additional_elements()
     add_arrows()
 
-    special_wish.place(x=118, y=150)
-    hbday.place(x=95, y=250)
-    date.place(x=95, y=315)
-    wedding.place(x=95, y=390)
-    not_other.place(x=95, y=465)
-    other.place(x=95, y=540)
+    special_wish.place(x=118, y=200)
+    hbday.place(x=95, y=300)
+    date.place(x=95, y=350)
+    wedding.place(x=95, y=400)
+    not_other.place(x=95, y=450)
+    other.place(x=95, y=500)
 
-    radiobutton_hbday.place(x=53, y=250 + 5)
-    radiobutton_date.place(x=53, y=315 + 5)
-    radiobutton_wedding.place(x=53, y=390 + 5)
-    radiobutton_not_other.place(x=53, y=465 + 5)
-    radiobutton_other.place(x=53, y=540 + 5)
+    radiobutton_hbday.place(x=53, y=300)
+    radiobutton_date.place(x=53, y=350)
+    radiobutton_wedding.place(x=53, y=400)
+    radiobutton_not_other.place(x=53, y=450)
+    radiobutton_other.place(x=53, y=500)
 
-    canvas.place(x=100, y=600)
+    canvas.place(x=95, y=550)
+
+    label_wish_1.place(x=100, y=730)
+    label_wish_2.place(x=28, y=770)
 
 
 if __name__ == "__main__":
@@ -1148,15 +1151,15 @@ if __name__ == "__main__":
     # ==================== Четвертое окно ===================== (window6)
     special_wish = Label(W, borderwidth=0, font=label_font, text="Особые пожелания",
                          fg=label_green_color, bg=bg_peach_color)
-    hbday = Label(W, borderwidth=0, font=label_font, text="Столик на день рождения",
+    hbday = Label(W, borderwidth=0, font=global_font, text="Столик на день рождения",
                   fg=label_green_color, bg=bg_peach_color)
-    date = Label(W, borderwidth=0, font=label_font, text="Столик для свидания",
+    date = Label(W, borderwidth=0, font=global_font, text="Столик для свидания",
                  fg=label_green_color, bg=bg_peach_color)
-    wedding = Label(W, borderwidth=0, font=label_font, text="Столик на свадьбу",
+    wedding = Label(W, borderwidth=0, font=global_font, text="Столик на свадьбу",
                     fg=label_green_color, bg=bg_peach_color)
-    not_other = Label(W, borderwidth=0, font=label_font, text="Пожеланий нет",
+    not_other = Label(W, borderwidth=0, font=global_font, text="Пожеланий нет",
                       fg=label_green_color, bg=bg_peach_color)
-    other = Label(W, borderwidth=0, font=label_font, text="Другое",
+    other = Label(W, borderwidth=0, font=global_font, text="Другое",
                   fg=label_green_color, bg=bg_peach_color)
 
     radio_button_1 = PhotoImage(file=Path(radiobutton_0))
@@ -1208,6 +1211,11 @@ if __name__ == "__main__":
     radiobutton_date.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_date))
     radiobutton_not_other.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_not_other))
     radiobutton_other.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_other))
+
+    label_wish_1 = Label(W, borderwidth=0, font=global_font, text="При выборе особого случая будет",
+                         fg=label_green_color, bg=bg_peach_color)
+    label_wish_2 = Label(W, borderwidth=0, font=global_font, text="предоставлена скидка 15% и комплимент от заведения",
+                         fg=label_green_color, bg=bg_peach_color)
 
 
 
