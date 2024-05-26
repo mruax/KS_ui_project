@@ -3,6 +3,7 @@ from tkinter.ttk import Frame
 from pathlib import Path
 
 from settings import *
+import copy
 
 
 def rgbtohex(r, g, b):
@@ -221,7 +222,9 @@ def button_dd_off(event, button):
 
 
 def button_dd_clicked(event, button):
-    global user_selected_page, user_selected_type
+    global user_selected_page, user_selected_type, user_selected_dishes
+    global user_selected_dishes_backup, user_selected_drinks
+
     if not button.clicked:
         user_selected_page = 1
         button['image'] = button_dd_white
@@ -232,11 +235,62 @@ def button_dd_clicked(event, button):
             button_drinks['image'] = button_dd
             button_drinks['foreground'] = fg_w
             user_selected_type = 1
+
+            user_selected_drinks = copy.deepcopy(user_selected_dishes)
+            user_selected_dishes = copy.deepcopy(user_selected_dishes_backup)
+            user_selected_dishes_backup = copy.deepcopy(user_selected_drinks)
         else:
             button_dish['image'] = button_dd
             button_dish['foreground'] = fg_w
             user_selected_type = 2
+
+            user_selected_dishes_backup = copy.deepcopy(user_selected_dishes)
+            user_selected_dishes = copy.deepcopy(user_selected_drinks)
         button.clicked = True
+
+        window5()
+        pages = 4
+        for page in range(pages):
+            try:
+                btn = globals().get(f"number_button_{page + 1}")
+                if page == 0:
+                    btn.clicked = True
+                    btn["image"] = number_img
+                    btn["foreground"] = fg_w
+                    user_selected_page = page + 1
+                    window5(event)
+                else:
+                    btn["image"] = number_light_img
+                    btn["foreground"] = fg_w
+                    btn.clicked = False
+            except Exception as e:
+                pass
+
+        if not user_selected_dishes[0][2]:
+            button_buy_1["image"] = image_buy
+            food_minus_button_1["state"] = "active"
+            food_plus_button_1["state"] = "active"
+            if user_selected_dishes[0][0] == 1:
+                food_minus_button_1["state"] = "disabled"
+            if user_selected_dishes[0][0] == 10:
+                food_plus_button_1["state"] = "disabled"
+        else:
+            button_buy_1["image"] = image_check
+            food_minus_button_1["state"] = "disabled"
+            food_plus_button_1["state"] = "disabled"
+
+        if not user_selected_dishes[0][3]:
+            button_buy_2["image"] = image_buy
+            food_minus_button_2["state"] = "active"
+            food_plus_button_2["state"] = "active"
+            if user_selected_dishes[0][1] == 1:
+                food_minus_button_2["state"] = "disabled"
+            if user_selected_dishes[0][1] == 10:
+                food_plus_button_2["state"] = "disabled"
+        else:
+            button_buy_2["image"] = image_check
+            food_minus_button_2["state"] = "disabled"
+            food_plus_button_2["state"] = "disabled"
 
 
 def dd_minus_btn_on(event, button):
@@ -372,10 +426,7 @@ def number_button_clicked(event, button):
     if button.clicked:
         return
     button.clicked = True
-    if user_selected_type == 1:
-        pages = 5
-    else:
-        pages = 4
+    pages = 4
     for page in range(pages):
         try:
             btn = globals().get(f"number_button_{page + 1}")
@@ -457,12 +508,18 @@ def add_arrows(event=None):
 
 
 def cards(event=None):
-    global user_selected_page, user_selected_dishes
+    global user_selected_page, user_selected_dishes, user_selected_type
     try:
-        card1 = globals().get(f"card_dish_{(user_selected_page - 1) * 2 + 1}")
-        card1.place(x=24, y=250 + 50)
-        card2 = globals().get(f"card_dish_{(user_selected_page - 1) * 2 + 2}")
-        card2.place(x=width - 24 - 217, y=250 + 50)
+        if user_selected_type == 1:
+            card1 = globals().get(f"card_dish_{(user_selected_page - 1) * 2 + 1}")
+            card1.place(x=24, y=250 + 50)
+            card2 = globals().get(f"card_dish_{(user_selected_page - 1) * 2 + 2}")
+            card2.place(x=width - 24 - 217, y=250 + 50)
+        else:
+            card1 = globals().get(f"card_drink_{(user_selected_page - 1) * 2 + 1}")
+            card1.place(x=24, y=250 + 50)
+            card2 = globals().get(f"card_drink_{(user_selected_page - 1) * 2 + 2}")
+            card2.place(x=width - 24 - 217, y=250 + 50)
 
         if user_selected_dishes[user_selected_page - 1][2]:
             food_plus_button_1["state"] = "disabled"
@@ -878,7 +935,9 @@ if __name__ == "__main__":
     user_selected_type = 1  # 1 - food, 2 - drinks
     # amount1, amount2, confirmed1, confirmed2
     user_selected_dishes = [[1, 1, False, False], [1, 1, False, False], [1, 1, False, False], [1, 1, False, False]]
-    user_selected_drinks = [[1, 1, False, False], [1, 1, False, False], [1, 1, False, False]]
+    user_selected_dishes_backup = [[1, 1, False, False], [1, 1, False, False],
+                                   [1, 1, False, False], [1, 1, False, False]]
+    user_selected_drinks = [[1, 1, False, False], [1, 1, False, False], [1, 1, False, False], [1, 1, False, False]]
 
     # Блюда:
     menu_label = Label(W, borderwidth=0, font=label_font, text="Выберите состав меню",
