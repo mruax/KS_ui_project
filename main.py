@@ -445,7 +445,19 @@ def number_button_clicked(event, button):
 
 
 # =================== Радио батоны пожеланий ===================
-# def
+def radiobutton_on(event, button):
+    button['image'] = radio_button_2
+
+
+def radiobutton_off(event, button):
+    button['image'] = radio_button_0
+
+
+def radiobutton_clicked(event, button):
+    button['image'] = radio_button_1
+
+
+
 
 
 
@@ -685,19 +697,19 @@ def window6(event=None):
 
     special_wish.place(x=118, y=150)
     hbday.place(x=95, y=250)
-    date.place(x=95, y=325)
-    wedding.place(x=95, y=400)
-    not_other.place(x=95, y=475)
-    other.place(x=95, y=550)
+    date.place(x=95, y=315)
+    wedding.place(x=95, y=390)
+    not_other.place(x=95, y=465)
+    other.place(x=95, y=540)
 
     radiobutton_hbday.place(x=53, y=250 + 5)
-    radiobutton_date.place(x=53, y=325 + 5)
-    radiobutton_wedding.place(x=53, y=400 + 5)
-    radiobutton_not_other.place(x=53, y=475 + 5)
-    radiobutton_other.place(x=53, y=550 + 5)
+    radiobutton_date.place(x=53, y=315 + 5)
+    radiobutton_wedding.place(x=53, y=390 + 5)
+    radiobutton_not_other.place(x=53, y=465 + 5)
+    radiobutton_other.place(x=53, y=540 + 5)
 
-    # label_field_wish.place(x=95, y=625 + 5)
-    field_wish.place(x=95, y=625 + 5)
+    label_field_wish.place(x=95, y=600)
+    # field_wish.place(x=100, y=625 + 5, width=290, height=49)
 
 
 
@@ -1161,25 +1173,25 @@ if __name__ == "__main__":
     radiobutton_other = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,
                                    foreground=fg_w, font=global_font, activebackground=bg_peach_color)
 
-    field_wish = Entry(W, borderwidth=0, bg=bg_peach_color, foreground=fg_b, font=global_font, width=290)
+    field_wish = Entry(W, borderwidth=0, bg=bg_w, foreground=fg_b, font=global_font, )
     label_field_wish = Label(W, image=input_field, borderwidth=0, compound="center", bg=bg_peach_color,
                            font=global_font, activebackground=bg_peach_color)
 
-    radiobutton_hbday.bind("<Enter>", lambda event: number_button_on(event, number_button_1))
-    radiobutton_date.bind("<Enter>", lambda event: number_button_on(event, number_button_2))
-    radiobutton_wedding.bind("<Enter>", lambda event: number_button_on(event, number_button_3))
-    radiobutton_not_other.bind("<Enter>", lambda event: number_button_on(event, number_button_4))
-    radiobutton_other.bind("<Enter>", lambda event: number_button_on(event, number_button_4))
-    radiobutton_hbday.bind("<Leave>", lambda event: number_button_off(event, number_button_1))
-    radiobutton_date.bind("<Leave>", lambda event: number_button_off(event, number_button_2))
-    radiobutton_wedding.bind("<Leave>", lambda event: number_button_off(event, number_button_3))
-    radiobutton_not_other.bind("<Leave>", lambda event: number_button_off(event, number_button_4))
-    radiobutton_other.bind("<Leave>", lambda event: number_button_on(event, number_button_4))
-    radiobutton_hbday.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_1))
-    radiobutton_wedding.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_2))
-    number_button_3.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_3))
-    radiobutton_not_other.bind("<Button-1>", lambda event: number_button_clicked(event, number_button_4))
-    radiobutton_other.bind("<Button-1>", lambda event: number_button_on(event, number_button_4))
+    radiobutton_hbday.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_hbday))
+    radiobutton_date.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_date))
+    radiobutton_wedding.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_wedding))
+    radiobutton_not_other.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_not_other))
+    radiobutton_other.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_other))
+    radiobutton_hbday.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_hbday))
+    radiobutton_date.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_date))
+    radiobutton_wedding.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_wedding))
+    radiobutton_not_other.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_not_other))
+    radiobutton_other.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_other))
+    radiobutton_hbday.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_hbday))
+    radiobutton_wedding.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_wedding))
+    radiobutton_date.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_date))
+    radiobutton_not_other.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_not_other))
+    radiobutton_other.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_other))
 
 
 
