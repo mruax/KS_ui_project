@@ -887,6 +887,13 @@ def window9(event=None):
     clearing_w_start()
     additional_elements()
 
+    okay.place(x=207, y=300)
+    success.place(x=68, y=425)
+    final_label_1.place(x=91, y=475)
+    final_label_2.place(x=92, y=500)
+    final_label_3.place(x=68, y=525)
+    final_label_4.place(x=143, y=550)
+
 
 if __name__ == "__main__":
     # ===================== Логика и параметры ===================
@@ -1456,7 +1463,18 @@ if __name__ == "__main__":
     send_button.bind("<Button-1>", change_color_final)
 
     # ===================== Седьмое окно ====================== (window9)
-
+    ok = PhotoImage(file=Path(okay))
+    okay = Label(W, image=ok, borderwidth=0, bg=bg_peach_color)
+    success = Label(W, borderwidth=0, font=label_font, text="Ваш столик забронирован!",
+                         fg=label_green_color, bg=bg_peach_color)
+    final_label_1 = Label(W, borderwidth=0, font=global_font, text="Информация о бронировании выслана",
+                         fg=label_green_color, bg=bg_peach_color)
+    final_label_2 = Label(W, borderwidth=0, font=global_font, text="на указанную Вами электронную почту",
+                          fg=label_green_color, bg=bg_peach_color)
+    final_label_3 = Label(W, borderwidth=0, font=global_font, text="С Вами свяжутся за день до выбранной даты",
+                          fg=label_green_color, bg=bg_peach_color)
+    final_label_4 = Label(W, borderwidth=0, font=global_font, text="для подтверждения брони",
+                          fg=label_green_color, bg=bg_peach_color)
     ...
 
     # ====================== Вызовы окон ======================
