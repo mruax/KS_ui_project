@@ -798,9 +798,6 @@ if __name__ == "__main__":
     forward_button.bind("<Leave>", off_forward)
     forward_button.bind("<Button-1>", change_color_forward)
 
-    # back_button["state"] = "disabled"
-    # forward_button["state"] = "disabled"
-
     # Даты:
     date_label = Label(W, borderwidth=0, font=label_font, text="Выберите дату",
                        fg=label_green_color, bg=bg_peach_color)
@@ -1177,6 +1174,12 @@ if __name__ == "__main__":
                                    foreground=fg_w, font=global_font, activebackground=bg_peach_color)
     radiobutton_other = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,
                                foreground=fg_w, font=global_font, activebackground=bg_peach_color)
+
+    radiobutton_hbday.clicked = False
+    radiobutton_date.clicked = False
+    radiobutton_wedding.clicked = False
+    radiobutton_not_other.clicked = False
+    radiobutton_other.clicked = False
 
     field_wish = Entry(W, borderwidth=0, bg=bg_w, foreground=fg_b, font=global_font)
     label_field_wish = Label(W, image=input_field, borderwidth=0, compound="center", bg=bg_peach_color,
