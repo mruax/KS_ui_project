@@ -404,10 +404,10 @@ def buy_button_clicked(event, button, side):
         else:
             food_minus_button_2["state"] = "disabled"
             food_plus_button_2["state"] = "disabled"
-# ==============================================================
+# ===============================================================
 
 
-# =================== Кнопки цифры =============================
+# ======================== Кнопки цифры =========================
 def number_button_on(event, button):
     if not button.clicked:
         button['image'] = number_light_dark_img
@@ -444,10 +444,10 @@ def number_button_clicked(event, button):
                 btn.clicked = False
         except Exception as e:
             pass
-# ==============================================================
+# ===============================================================
 
 
-# =================== Радио батоны пожеланий ===================
+# =================== Радио батоны пожеланий ====================
 def radiobutton_on(event, button):
     if button.clicked:
         button['image'] = radio_button_1
@@ -490,7 +490,22 @@ def check_radios(event):
         canvas.place(x=95, y=535)
     else:
         canvas.place(x=-300, y=-300)
-# ==============================================================
+# ===============================================================
+
+
+# ======================== Кнопка финал =========================
+def on_final(event=None):
+    send_button["image"] = img_button_prefinish_dark
+
+
+def off_final(event=None):
+    send_button["image"] = img_button_prefinish
+
+
+def change_color_final(event=None):
+    send_button["image"] = img_button_prefinish_light
+    window9()
+# ===============================================================
 
 
 def clearing_w_start():
@@ -802,10 +817,6 @@ def window9(event=None):
     window_number = 9
     clearing_w_start()
     additional_elements()
-    add_arrows()
-
-
-
 
 
 if __name__ == "__main__":
@@ -1343,12 +1354,16 @@ if __name__ == "__main__":
     w8_email_label = Label(W, borderwidth=0, font=global_font, text="Введите Вашу почту",
                            fg=label_green_color, bg=bg_peach_color)
 
-    send_button = Button(W, image=arrow_forward_img, borderwidth=0,
+    img_button_prefinish = PhotoImage(file=Path(button_prefinish))
+    img_button_prefinish_dark = PhotoImage(file=Path(button_prefinish_dark))
+    img_button_prefinish_light = PhotoImage(file=Path(button_prefinish_light))
+
+    send_button = Button(W, image=img_button_prefinish, borderwidth=0,
                          text="ОТПРАВИТЬ", font=global_font, foreground=fg_w,
                          compound="center", command=next_win, bg=bg_peach_color, activebackground=bg_peach_color)
-    send_button.bind("<Enter>", on_forward)
-    send_button.bind("<Leave>", off_forward)
-    send_button.bind("<Button-1>", change_color_forward)
+    send_button.bind("<Enter>", on_final)
+    send_button.bind("<Leave>", off_final)
+    send_button.bind("<Button-1>", change_color_final)
 
     # ===================== Седьмое окно ====================== (window9)
 

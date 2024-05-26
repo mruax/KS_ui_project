@@ -94,6 +94,9 @@ time_or_date_block = "src\\win5\\bg_time_or_date.png"
 
 # Шестое окно
 inputfield2 = "src\\win6\\input_field_info.png"
+button_prefinish = "src\\win6\\button_prefinish.png"
+button_prefinish_dark = "src\\win6\\button_prefinish_dark.png"
+button_prefinish_light = "src\\win6\\button_prefinish_light.png"
 
 # Седьмое окно
 okay = "src\\win7\\ok.png"
