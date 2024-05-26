@@ -524,6 +524,21 @@ def change_color_final(event=None):
 # ===============================================================
 
 
+# ======================== Кнопка дай чек =======================
+def check_button_on(event=None):
+    check_button['image'] = img_button_prefinish_dark
+
+
+def check_button_off(event=None):
+    check_button['image'] = img_button_prefinish
+
+
+def check_button_clicked(event=None):
+    check_button["image"] = img_button_prefinish_light
+    exit()
+
+# ===============================================================
+
 def clearing_w_start():
     """
     Удаление всех виджетов из окна.
@@ -893,6 +908,8 @@ def window9(event=None):
     final_label_2.place(x=92, y=500)
     final_label_3.place(x=68, y=525)
     final_label_4.place(x=143, y=550)
+
+    check_button.place(x=130, y=673)
 
 
 if __name__ == "__main__":
@@ -1475,7 +1492,13 @@ if __name__ == "__main__":
                           fg=label_green_color, bg=bg_peach_color)
     final_label_4 = Label(W, borderwidth=0, font=global_font, text="для подтверждения брони",
                           fg=label_green_color, bg=bg_peach_color)
-    ...
+
+    check_button = Button(W, image=img_button_prefinish, borderwidth=0, compound="center", bg=bg_peach_color,
+                           foreground=fg_w, font=global_font, text="ПОКАЗАТЬ ЧЕК", activebackground=bg_peach_color)
+
+    check_button.bind("<Enter>", check_button_on)
+    check_button.bind("<Leave>", check_button_off)
+    check_button.bind("<Button-1>", check_button_clicked)
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
