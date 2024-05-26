@@ -1,11 +1,11 @@
-from tkinter import *
+import copy
+import os
 from pathlib import Path
+from tkinter import *
+
 from check import *
 from menu import *
-import os
-
 from settings import *
-import copy
 
 
 def rgbtohex(r, g, b):
