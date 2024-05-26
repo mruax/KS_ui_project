@@ -757,12 +757,15 @@ def window6(event=None):
     label_wish_1.place(x=100, y=755)
     label_wish_2.place(x=28, y=785)
 
+    forward_button["text"] = "ДАЛЕЕ"
+
 
 def window7(event=None):
     global window_number
     window_number = 7
     clearing_w_start()
     additional_elements()
+    forward_button["text"] = "ПОДТВЕРДИТЬ"
     add_arrows()
 
     canvas2.place(x=-300, y=-300)
@@ -770,18 +773,39 @@ def window7(event=None):
     canvas4.place(x=-300, y=-300)
 
 
+def window8(event=None):
+    """
+    Окно с энтраями.
 
-
-def window8(event=None): #Окно с ентраями
+    :param event: None
+    :return: None
+    """
     global window_number
     window_number = 8
     clearing_w_start()
     additional_elements()
+
+    w8_fio_label.place(x=51, y=207)
+    canvas2.place(x=51, y=242)
+
+    w8_number_label.place(x=51, y=333)
+    canvas3.place(x=51, y=368)
+
+    w8_email_label.place(x=51, y=459)
+    canvas4.place(x=51, y=494)
+
+    send_button.place(x=130, y=673)
+
+
+def window9(event=None):
+    global window_number
+    window_number = 9
+    clearing_w_start()
+    additional_elements()
     add_arrows()
 
-    canvas2.place(x=51, y=242)
-    canvas3.place(x=51, y=368)
-    canvas4.place(x=51, y=494)
+
+
 
 
 if __name__ == "__main__":
@@ -1283,7 +1307,7 @@ if __name__ == "__main__":
 
     # ====================== Пятое окно ======================= (window7)
 
-
+    ...
 
     # ===================== Шестое окно ======================= (window8)
     entry_image = PhotoImage(file=Path(inputfield2))
@@ -1291,27 +1315,44 @@ if __name__ == "__main__":
     canvas2 = Canvas(W, width=400, height=52, background=bg_peach_color, borderwidth=0)
     canvas2.pack()
     fio_label = Label(W, bg=bg_peach_color, image=entry_image)
-    canvas2.create_window(200, 26, window=fio_label, width=306, height=60)
+    canvas2.create_window(200, 26, window=fio_label, width=400, height=60)
     fio_entry = Entry(W, borderwidth=0, font=global_font2)
-    canvas2.create_window(200, 26, window=fio_entry, width=280, height=45)
+    canvas2.create_window(200, 26, window=fio_entry, width=380, height=45)
     canvas2.place(x=-300, y=-300)
 
     canvas3 = Canvas(W, width=400, height=52, background=bg_peach_color, borderwidth=0)
     canvas3.pack()
     fio_label = Label(W, bg=bg_peach_color, image=entry_image)
-    canvas3.create_window(200, 26, window=fio_label, width=306, height=60)
+    canvas3.create_window(200, 26, window=fio_label, width=400, height=60)
     fio_entry = Entry(W, borderwidth=0, font=global_font2)
-    canvas3.create_window(200, 26, window=fio_entry, width=280, height=45)
+    canvas3.create_window(200, 26, window=fio_entry, width=380, height=45)
     canvas3.place(x=-300, y=-300)
 
-    canvas4 = Canvas(W, width=296, height=52, background=bg_peach_color, borderwidth=0)
+    canvas4 = Canvas(W, width=400, height=52, background=bg_peach_color, borderwidth=0)
     canvas4.pack()
     fio_label = Label(W, bg=bg_peach_color, image=entry_image)
-    canvas4.create_window(200, 26, window=fio_label, width=306, height=60)
+    canvas4.create_window(200, 26, window=fio_label, width=400, height=60)
     fio_entry = Entry(W, borderwidth=0, font=global_font2)
-    canvas4.create_window(200, 26, window=fio_entry, width=280, height=45)
+    canvas4.create_window(200, 26, window=fio_entry, width=380, height=45)
     canvas4.place(x=-300, y=-300)
 
+    w8_fio_label = Label(W, borderwidth=0, font=global_font, text="Введите Ваше ФИО",
+                         fg=label_green_color, bg=bg_peach_color)
+    w8_number_label = Label(W, borderwidth=0, font=global_font, text="Введите Ваш номер телефона",
+                            fg=label_green_color, bg=bg_peach_color)
+    w8_email_label = Label(W, borderwidth=0, font=global_font, text="Введите Вашу почту",
+                           fg=label_green_color, bg=bg_peach_color)
+
+    send_button = Button(W, image=arrow_forward_img, borderwidth=0,
+                         text="ОТПРАВИТЬ", font=global_font, foreground=fg_w,
+                         compound="center", command=next_win, bg=bg_peach_color, activebackground=bg_peach_color)
+    send_button.bind("<Enter>", on_forward)
+    send_button.bind("<Leave>", off_forward)
+    send_button.bind("<Button-1>", change_color_forward)
+
+    # ===================== Седьмое окно ====================== (window9)
+
+    ...
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
