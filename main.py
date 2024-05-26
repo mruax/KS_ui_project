@@ -676,6 +676,13 @@ def window6(event=None):
     additional_elements()
     add_arrows()
 
+    special_wish.place(x=118, y=200)
+    hbday.place(x=125, y=300)
+    date.place(x=125, y=400)
+    wedding.place(x=125, y=500)
+    not_other.place(x=125, y=400)
+    other.place(x=125, y=450)
+
 
 
     ...
@@ -980,6 +987,8 @@ if __name__ == "__main__":
     card_d4 = PhotoImage(file=Path(cardn4))
     card_d5 = PhotoImage(file=Path(cardn5))
     card_d6 = PhotoImage(file=Path(cardn6))
+    card_d7 = PhotoImage(file=Path(cardn7))
+    card_d8 = PhotoImage(file=Path(cardn8))
 
     card_dish_1 = Label(W, image=card_1, borderwidth=0, compound="center", bg=bg_peach_color,
                         foreground=fg_b, font=global_font)
@@ -1008,6 +1017,10 @@ if __name__ == "__main__":
     card_drink_5 = Label(W, image=card_d5, borderwidth=0, compound="center", bg=bg_peach_color,
                          foreground=fg_b, font=global_font)
     card_drink_6 = Label(W, image=card_d6, borderwidth=0, compound="center", bg=bg_peach_color,
+                         foreground=fg_b, font=global_font)
+    card_drink_7 = Label(W, image=card_d7, borderwidth=0, compound="center", bg=bg_peach_color,
+                         foreground=fg_b, font=global_font)
+    card_drink_8 = Label(W, image=card_d8, borderwidth=0, compound="center", bg=bg_peach_color,
                          foreground=fg_b, font=global_font)
     button_dish.clicked = True
     button_drinks.clicked = False
@@ -1102,6 +1115,24 @@ if __name__ == "__main__":
     number_button_3.clicked = False
     number_button_4.clicked = False
 
+
+    # ====================== Третье окно ====================== (window6)
+    special_wish = Label(W, borderwidth=0, font=label_font, text="Особые пожелания",
+                       fg=label_green_color, bg=bg_peach_color)
+    hbday = Label(W, borderwidth=0, font=global_font, text="Столик на день рождения",
+                       fg=label_green_color, bg=bg_peach_color)
+    date = Label(W, borderwidth=0, font=global_font, text="Столик для свидания",
+                  fg=label_green_color, bg=bg_peach_color)
+    wedding = Label(W, borderwidth=0, font=global_font, text="Столик на свадьбу",
+                 fg=label_green_color, bg=bg_peach_color)
+    not_other = Label(W, borderwidth=0, font=global_font, text="Пожеланий нет",
+                 fg=label_green_color, bg=bg_peach_color)
+    other = Label(W, borderwidth=0, font=global_font, text="Другое",
+                 fg=label_green_color, bg=bg_peach_color)
+
+    radio_button_1 = PhotoImage(file=Path(radiobutton_0))
+    radio_button_0 = PhotoImage(file=Path(radiobutton_1))
+    radio_button_2 = PhotoImage(file=Path(radiobutton_2))
 
 
 
