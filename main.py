@@ -787,6 +787,21 @@ def window7(event=None):
     canvas3.place(x=-300, y=-300)
     canvas4.place(x=-300, y=-300)
 
+    confirmation.place(x=144, y=200)
+    info_block.place(x=22, y=300)
+    data.place(x=110, y=307 + 15)
+    time.place(x=110, y=360 + 15)
+    people.place(x=110, y=412 + 15)
+    amount.place(x=110, y=465 + 15)
+
+    data_block.place(x=180, y=307)
+    time_block.place(x=180, y=360)
+    people_block.place(x=180 + 234 - 102, y=412)
+    amount_block.place(x=180 + 234 - 102, y=465)
+
+
+
+
 
 def window8(event=None):
     """
@@ -1317,6 +1332,26 @@ if __name__ == "__main__":
     canvas.place(x=-300, y=-300)
 
     # ====================== Пятое окно ======================= (window7)
+    info_block_bg = PhotoImage(file=Path(info_block))
+    people_or_amount_block_bg = PhotoImage(file=Path(people_or_amount_block))
+    time_or_date_block_bg = PhotoImage(file=Path(time_or_date_block))
+
+    info_block = Label(W, bg=bg_peach_color, image=info_block_bg)
+    people_block = Label(W, bg=bg_w, image=people_or_amount_block_bg)
+    amount_block = Label(W, bg=bg_w, image=people_or_amount_block_bg)
+    time_block = Label(W, bg=bg_w, image=time_or_date_block_bg)
+    data_block = Label(W, bg=bg_w, image=time_or_date_block_bg)
+
+    confirmation = Label(W, borderwidth=0, font=label_font, text="Подтверждение",
+                         fg=label_green_color, bg=bg_peach_color)
+    data = Label(W, borderwidth=0, font=global_font, text="Дата:",
+                         fg=label_green_color, bg=bg_w)
+    time = Label(W, borderwidth=0, font=global_font, text="Время:",
+                         fg=label_green_color, bg=bg_w)
+    people = Label(W, borderwidth=0, font=global_font, text="Количество гостей:",
+                         fg=label_green_color, bg=bg_w)
+    amount = Label(W, borderwidth=0, font=global_font, text="Итоговая стоимость:",
+                   fg=label_green_color, bg=bg_w)
 
     ...
 
