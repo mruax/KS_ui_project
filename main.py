@@ -51,17 +51,17 @@ def change_color_forward(event=None):
 
 # ======================== Кнопка назад =========================
 def on_back(event=None):
-    if back_button["state"] == "active":
+    if back_button["state"] != "disabled":
         back_button["image"] = arrow_back_dark_img
 
 
 def off_back(event=None):
-    if back_button["state"] == "active":
+    if back_button["state"] != "disabled":
         back_button["image"] = arrow_back_img
 
 
 def change_color_back(event=None):
-    if back_button["state"] == "active":
+    if back_button["state"] != "disabled":
         back_button["image"] = arrow_back_light_img
 # ===============================================================
 
@@ -449,22 +449,49 @@ def number_button_clicked(event, button):
 
 # =================== Радио батоны пожеланий ===================
 def radiobutton_on(event, button):
-    button['image'] = radio_button_2
+    if button.clicked:
+        button['image'] = radio_button_1
+    else:
+        button['image'] = radio_button_2
 
 
 def radiobutton_off(event, button):
-    button['image'] = radio_button_0
+    if button.clicked:
+        button['image'] = radio_button_1
+    else:
+        button['image'] = radio_button_0
 
 
 def radiobutton_clicked(event, button):
-    button['image'] = radio_button_1
+    if not button.clicked:
+        button.clicked = True
+    for radio in range(5):
+        try:
+            btn = globals().get(f"radiobutton_{radio + 1}")
+            if btn != button:
+                btn.clicked = False
+        except Exception as e:
+            pass
+
+    check_radios(event)
 
 
-
-
-
-
+def check_radios(event):
+    for radio in range(5):
+        try:
+            btn = globals().get(f"radiobutton_{radio + 1}")
+            if btn.clicked:
+                btn["image"] = radio_button_1
+            else:
+                btn["image"] = radio_button_0
+        except Exception as e:
+            pass
+    if radiobutton_5.clicked:
+        canvas.place(x=100, y=600)
+    else:
+        canvas.place(x=-300, y=-300)
 # ==============================================================
+
 
 def clearing_w_start():
     """
@@ -696,6 +723,7 @@ def window5(event=None):
     number_button_4.place(x=(width + 214 - 72) // 2, y=height - 24 - 88 - 83 + 2)
 
     back_button["state"] = "active"
+    back_button["image"] = arrow_back_img
 
 
 def window6(event=None):
@@ -705,23 +733,20 @@ def window6(event=None):
     additional_elements()
     add_arrows()
 
-    special_wish.place(x=118, y=200)
-    hbday.place(x=95, y=300)
-    date.place(x=95, y=350)
-    wedding.place(x=95, y=400)
-    not_other.place(x=95, y=450)
-    other.place(x=95, y=500)
+    special_wish.place(x=118, y=150)
+    hbday.place(x=95, y=250)
+    date.place(x=95, y=315)
+    wedding.place(x=95, y=390)
+    not_other.place(x=95, y=465)
+    other.place(x=95, y=540)
 
-    radiobutton_hbday.place(x=53, y=300)
-    radiobutton_date.place(x=53, y=350)
-    radiobutton_wedding.place(x=53, y=400)
-    radiobutton_not_other.place(x=53, y=450)
-    radiobutton_other.place(x=53, y=500)
+    radiobutton_1.place(x=53, y=250 + 5)
+    radiobutton_2.place(x=53, y=315 + 5)
+    radiobutton_3.place(x=53, y=390 + 5)
+    radiobutton_4.place(x=53, y=465 + 5)
+    radiobutton_5.place(x=53, y=540 + 5)
 
-    canvas.place(x=95, y=550)
-
-    label_wish_1.place(x=100, y=730)
-    label_wish_2.place(x=28, y=770)
+    check_radios(event)
 
 
 if __name__ == "__main__":
@@ -973,6 +998,7 @@ if __name__ == "__main__":
     # Переменные:
     user_selected_page = 1
     user_selected_type = 1  # 1 - food, 2 - drinks
+
     # amount1, amount2, confirmed1, confirmed2
     user_selected_dishes = [[1, 1, False, False], [1, 1, False, False], [1, 1, False, False], [1, 1, False, False]]
     user_selected_dishes_backup = [[1, 1, False, False], [1, 1, False, False],
@@ -1149,40 +1175,59 @@ if __name__ == "__main__":
     number_button_4.clicked = False
 
     # ==================== Четвертое окно ===================== (window6)
+    # Переменные:
+    user_selected_preferences = None  # default None/3
+
     special_wish = Label(W, borderwidth=0, font=label_font, text="Особые пожелания",
                          fg=label_green_color, bg=bg_peach_color)
-    hbday = Label(W, borderwidth=0, font=global_font, text="Столик на день рождения",
+    hbday = Label(W, borderwidth=0, font=label_font, text="Столик на день рождения",
                   fg=label_green_color, bg=bg_peach_color)
-    date = Label(W, borderwidth=0, font=global_font, text="Столик для свидания",
+    date = Label(W, borderwidth=0, font=label_font, text="Столик для свидания",
                  fg=label_green_color, bg=bg_peach_color)
-    wedding = Label(W, borderwidth=0, font=global_font, text="Столик на свадьбу",
+    wedding = Label(W, borderwidth=0, font=label_font, text="Столик на свадьбу",
                     fg=label_green_color, bg=bg_peach_color)
-    not_other = Label(W, borderwidth=0, font=global_font, text="Пожеланий нет",
+    not_other = Label(W, borderwidth=0, font=label_font, text="Пожеланий нет",
                       fg=label_green_color, bg=bg_peach_color)
-    other = Label(W, borderwidth=0, font=global_font, text="Другое",
+    other = Label(W, borderwidth=0, font=label_font, text="Другое",
                   fg=label_green_color, bg=bg_peach_color)
 
-    radio_button_1 = PhotoImage(file=Path(radiobutton_0))
-    radio_button_0 = PhotoImage(file=Path(radiobutton_1))
-    radio_button_2 = PhotoImage(file=Path(radiobutton_2))
+    radio_button_1 = PhotoImage(file=Path(radiobutton_0))  # с точкой
+    radio_button_0 = PhotoImage(file=Path(radiobutton_1))  # пустая
+    radio_button_2 = PhotoImage(file=Path(radiobutton_2))  # серая пустая
     input_field = PhotoImage(file=Path(inputfield))
 
-    radiobutton_hbday = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,
-                               foreground=fg_w, font=global_font, activebackground=bg_peach_color)
-    radiobutton_date = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,
-                              foreground=fg_w, font=global_font, activebackground=bg_peach_color)
-    radiobutton_wedding = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,
-                                 foreground=fg_w, font=global_font, activebackground=bg_peach_color)
-    radiobutton_not_other = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,
-                                   foreground=fg_w, font=global_font, activebackground=bg_peach_color)
-    radiobutton_other = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,
-                               foreground=fg_w, font=global_font, activebackground=bg_peach_color)
+    radiobutton_1 = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,  # hbday
+                           foreground=fg_w, font=global_font, activebackground=bg_peach_color)
+    radiobutton_2 = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,  # date
+                           foreground=fg_w, font=global_font, activebackground=bg_peach_color)
+    radiobutton_3 = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,  # wedding
+                           foreground=fg_w, font=global_font, activebackground=bg_peach_color)
+    radiobutton_4 = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,  # not_other
+                           foreground=fg_w, font=global_font, activebackground=bg_peach_color)
+    radiobutton_5 = Button(W, image=radio_button_0, borderwidth=0, compound="center", bg=bg_peach_color,  # _other
+                           foreground=fg_w, font=global_font, activebackground=bg_peach_color)
 
-    radiobutton_hbday.clicked = False
-    radiobutton_date.clicked = False
-    radiobutton_wedding.clicked = False
-    radiobutton_not_other.clicked = False
-    radiobutton_other.clicked = False
+    radiobutton_1.clicked = False
+    radiobutton_2.clicked = False
+    radiobutton_3.clicked = False
+    radiobutton_4.clicked = False
+    radiobutton_5.clicked = False
+
+    radiobutton_1.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_1))
+    radiobutton_1.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_1))
+    radiobutton_1.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_1))
+    radiobutton_2.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_2))
+    radiobutton_2.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_2))
+    radiobutton_2.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_2))
+    radiobutton_3.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_3))
+    radiobutton_3.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_3))
+    radiobutton_3.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_3))
+    radiobutton_4.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_4))
+    radiobutton_4.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_4))
+    radiobutton_4.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_4))
+    radiobutton_5.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_5))
+    radiobutton_5.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_5))
+    radiobutton_5.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_5))
 
     field_wish = Entry(W, borderwidth=0, bg=bg_w, foreground=fg_b, font=global_font)
     label_field_wish = Label(W, image=input_field, borderwidth=0, compound="center", bg=bg_peach_color,
@@ -1195,29 +1240,6 @@ if __name__ == "__main__":
     entry = Entry(W, borderwidth=0, font=global_font2)
     canvas.create_window(148, 25, window=entry, width=280, height=45)
     canvas.place(x=-300, y=-300)
-
-    radiobutton_hbday.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_hbday))
-    radiobutton_date.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_date))
-    radiobutton_wedding.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_wedding))
-    radiobutton_not_other.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_not_other))
-    radiobutton_other.bind("<Enter>", lambda event: radiobutton_on(event, radiobutton_other))
-    radiobutton_hbday.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_hbday))
-    radiobutton_date.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_date))
-    radiobutton_wedding.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_wedding))
-    radiobutton_not_other.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_not_other))
-    radiobutton_other.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_other))
-    radiobutton_hbday.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_hbday))
-    radiobutton_wedding.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_wedding))
-    radiobutton_date.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_date))
-    radiobutton_not_other.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_not_other))
-    radiobutton_other.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_other))
-
-    label_wish_1 = Label(W, borderwidth=0, font=global_font, text="При выборе особого случая будет",
-                         fg=label_green_color, bg=bg_peach_color)
-    label_wish_2 = Label(W, borderwidth=0, font=global_font, text="предоставлена скидка 15% и комплимент от заведения",
-                         fg=label_green_color, bg=bg_peach_color)
-
-
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
