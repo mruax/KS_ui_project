@@ -5,6 +5,7 @@ height = 932
 
 # Заготовки для шрифтов и цветов
 global_font = ("Aptos", "12", "bold")
+global_font2 = ("Aptos", "12")
 label_font = ("Aptos", "20", "bold")
 fg_w = "white"
 fg_b = "black"
