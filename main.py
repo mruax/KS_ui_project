@@ -770,7 +770,9 @@ def window7(event=None):
     canvas4.place(x=-300, y=-300)
 
 
-def window8(event=None):
+
+
+def window8(event=None): #Окно с ентраями
     global window_number
     window_number = 8
     clearing_w_start()
@@ -1280,6 +1282,10 @@ if __name__ == "__main__":
     canvas.place(x=-300, y=-300)
 
     # ====================== Пятое окно ======================= (window7)
+
+
+
+    # ===================== Шестое окно ======================= (window8)
     entry_image = PhotoImage(file=Path(inputfield2))
 
     canvas2 = Canvas(W, width=400, height=52, background=bg_peach_color, borderwidth=0)
@@ -1305,9 +1311,6 @@ if __name__ == "__main__":
     fio_entry = Entry(W, borderwidth=0, font=global_font2)
     canvas4.create_window(200, 26, window=fio_entry, width=280, height=45)
     canvas4.place(x=-300, y=-300)
-
-    # ===================== Шестое окно ======================= (window8)
-
 
 
     # ====================== Вызовы окон ======================

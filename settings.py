@@ -87,5 +87,13 @@ radiobutton_1 = "src\\win4\\radiobutton_1.png"
 radiobutton_2 = "src\\win4\\radiobutton_2.png"
 inputfield = "src\\win4\\input_field.png"
 
+# Пятое окно
+info_block = "src\\win5\\bg_data.png"
+people_or_amount_block = "src\\win5\\bg_people_or_amount.png"
+time_or_date_block = "src\\win5\\bg_time_or_date.png"
+
 # Шестое окно
-inputfield2 = "src\\win6\\input_field.png"
+inputfield2 = "src\\win6\\input_field_info.png"
+
+# Седьмое окно
+okay = "src\\win7\\ok.png"
