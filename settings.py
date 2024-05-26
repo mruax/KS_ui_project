@@ -80,7 +80,12 @@ food_plus_dark = "src\\win3\\food_plus_dark.png"
 check = "src\\win3\\check.png"
 check_dark = "src\\win3\\check_dark.png"
 check_light = "src\\win3\\check_light.png"
+
+# Четвертое окно
 radiobutton_0 = "src\\win4\\radiobutton_0.png"
 radiobutton_1 = "src\\win4\\radiobutton_1.png"
 radiobutton_2 = "src\\win4\\radiobutton_2.png"
 inputfield = "src\\win4\\input_field.png"
+
+# Шестое окно
+inputfield2 = "src\\win6\\input_field.png"

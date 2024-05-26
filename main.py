@@ -532,6 +532,12 @@ def back_win():
         case 6:
             clearing_w_start()
             window5()
+        case 7:
+            clearing_w_start()
+            window6()
+        case 8:
+            clearing_w_start()
+            window7()
         case _:
             pass
 
@@ -747,6 +753,30 @@ def window6(event=None):
     radiobutton_5.place(x=53, y=540 + 5)
 
     check_radios(event)
+
+
+def window7(event=None):
+    global window_number
+    window_number = 7
+    clearing_w_start()
+    additional_elements()
+    add_arrows()
+
+    canvas2.place(x=-300, y=-300)
+    canvas3.place(x=-300, y=-300)
+    canvas4.place(x=-300, y=-300)
+
+
+def window8(event=None):
+    global window_number
+    window_number = 8
+    clearing_w_start()
+    additional_elements()
+    add_arrows()
+
+    canvas2.place(x=51, y=242)
+    canvas3.place(x=51, y=368)
+    canvas4.place(x=51, y=494)
 
 
 if __name__ == "__main__":
@@ -1229,17 +1259,48 @@ if __name__ == "__main__":
     radiobutton_5.bind("<Leave>", lambda event: radiobutton_off(event, radiobutton_5))
     radiobutton_5.bind("<Button-1>", lambda event: radiobutton_clicked(event, radiobutton_5))
 
-    field_wish = Entry(W, borderwidth=0, bg=bg_w, foreground=fg_b, font=global_font)
-    label_field_wish = Label(W, image=input_field, borderwidth=0, compound="center", bg=bg_peach_color,
-                             font=global_font)
+    # field_wish = Entry(W, borderwidth=0, bg=bg_w, foreground=fg_b, font=global_font)
+    # label_field_wish = Label(W, image=input_field, borderwidth=0, compound="center", bg=bg_peach_color,
+    #                          font=global_font)
 
     canvas = Canvas(W, width=296, height=51, background=bg_peach_color, borderwidth=0)
     canvas.pack()
-    label = Label(W, bg=bg_peach_color, image=input_field)
-    canvas.create_window(148, 25, window=label, width=306, height=60)
-    entry = Entry(W, borderwidth=0, font=global_font2)
-    canvas.create_window(148, 25, window=entry, width=280, height=45)
+    label_field_wish = Label(W, bg=bg_peach_color, image=input_field)
+    canvas.create_window(148, 25, window=label_field_wish, width=306, height=60)
+    field_wish = Entry(W, borderwidth=0, font=global_font2)
+    canvas.create_window(148, 25, window=field_wish, width=280, height=45)
     canvas.place(x=-300, y=-300)
+
+    # ====================== Пятое окно ======================= (window7)
+    entry_image = PhotoImage(file=Path(inputfield2))
+
+    canvas2 = Canvas(W, width=400, height=52, background=bg_peach_color, borderwidth=0)
+    canvas2.pack()
+    fio_label = Label(W, bg=bg_peach_color, image=entry_image)
+    canvas2.create_window(200, 26, window=fio_label, width=306, height=60)
+    fio_entry = Entry(W, borderwidth=0, font=global_font2)
+    canvas2.create_window(200, 26, window=fio_entry, width=280, height=45)
+    canvas2.place(x=-300, y=-300)
+
+    canvas3 = Canvas(W, width=400, height=52, background=bg_peach_color, borderwidth=0)
+    canvas3.pack()
+    fio_label = Label(W, bg=bg_peach_color, image=entry_image)
+    canvas3.create_window(200, 26, window=fio_label, width=306, height=60)
+    fio_entry = Entry(W, borderwidth=0, font=global_font2)
+    canvas3.create_window(200, 26, window=fio_entry, width=280, height=45)
+    canvas3.place(x=-300, y=-300)
+
+    canvas4 = Canvas(W, width=296, height=52, background=bg_peach_color, borderwidth=0)
+    canvas4.pack()
+    fio_label = Label(W, bg=bg_peach_color, image=entry_image)
+    canvas4.create_window(200, 26, window=fio_label, width=306, height=60)
+    fio_entry = Entry(W, borderwidth=0, font=global_font2)
+    canvas4.create_window(200, 26, window=fio_entry, width=280, height=45)
+    canvas4.place(x=-300, y=-300)
+
+    # ===================== Шестое окно ======================= (window8)
+
+
 
     # ====================== Вызовы окон ======================
     window1()  # Отображение элементов интерфейса первого окна
