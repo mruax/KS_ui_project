@@ -487,7 +487,7 @@ def check_radios(event):
         except Exception as e:
             pass
     if radiobutton_5.clicked:
-        canvas.place(x=100, y=600)
+        canvas.place(x=95, y=535)
     else:
         canvas.place(x=-300, y=-300)
 # ==============================================================
@@ -739,20 +739,23 @@ def window6(event=None):
     additional_elements()
     add_arrows()
 
-    special_wish.place(x=118, y=150)
-    hbday.place(x=95, y=250)
-    date.place(x=95, y=315)
-    wedding.place(x=95, y=390)
-    not_other.place(x=95, y=465)
-    other.place(x=95, y=540)
+    special_wish.place(x=118, y=200)
+    hbday.place(x=95, y=300)
+    date.place(x=95, y=350)
+    wedding.place(x=95, y=400)
+    not_other.place(x=95, y=450)
+    other.place(x=95, y=500)
 
-    radiobutton_1.place(x=53, y=250 + 5)
-    radiobutton_2.place(x=53, y=315 + 5)
-    radiobutton_3.place(x=53, y=390 + 5)
-    radiobutton_4.place(x=53, y=465 + 5)
-    radiobutton_5.place(x=53, y=540 + 5)
+    radiobutton_1.place(x=53, y=300)
+    radiobutton_2.place(x=53, y=350)
+    radiobutton_3.place(x=53, y=400)
+    radiobutton_4.place(x=53, y=450)
+    radiobutton_5.place(x=53, y=500)
 
     check_radios(event)
+
+    label_wish_1.place(x=100, y=755)
+    label_wish_2.place(x=28, y=785)
 
 
 def window7(event=None):
@@ -1210,15 +1213,15 @@ if __name__ == "__main__":
 
     special_wish = Label(W, borderwidth=0, font=label_font, text="Особые пожелания",
                          fg=label_green_color, bg=bg_peach_color)
-    hbday = Label(W, borderwidth=0, font=label_font, text="Столик на день рождения",
+    hbday = Label(W, borderwidth=0, font=global_font, text="Столик на день рождения",
                   fg=label_green_color, bg=bg_peach_color)
-    date = Label(W, borderwidth=0, font=label_font, text="Столик для свидания",
+    date = Label(W, borderwidth=0, font=global_font, text="Столик для свидания",
                  fg=label_green_color, bg=bg_peach_color)
-    wedding = Label(W, borderwidth=0, font=label_font, text="Столик на свадьбу",
+    wedding = Label(W, borderwidth=0, font=global_font, text="Столик на свадьбу",
                     fg=label_green_color, bg=bg_peach_color)
-    not_other = Label(W, borderwidth=0, font=label_font, text="Пожеланий нет",
+    not_other = Label(W, borderwidth=0, font=global_font, text="Пожеланий нет",
                       fg=label_green_color, bg=bg_peach_color)
-    other = Label(W, borderwidth=0, font=label_font, text="Другое",
+    other = Label(W, borderwidth=0, font=global_font, text="Другое",
                   fg=label_green_color, bg=bg_peach_color)
 
     radio_button_1 = PhotoImage(file=Path(radiobutton_0))  # с точкой
@@ -1262,6 +1265,11 @@ if __name__ == "__main__":
     # field_wish = Entry(W, borderwidth=0, bg=bg_w, foreground=fg_b, font=global_font)
     # label_field_wish = Label(W, image=input_field, borderwidth=0, compound="center", bg=bg_peach_color,
     #                          font=global_font)
+
+    label_wish_1 = Label(W, borderwidth=0, font=global_font, text="При выборе особого случая будет",
+                         fg=label_green_color, bg=bg_peach_color)
+    label_wish_2 = Label(W, borderwidth=0, font=global_font, text="предоставлена скидка 15% и комплимент от заведения",
+                         fg=label_green_color, bg=bg_peach_color)
 
     canvas = Canvas(W, width=296, height=51, background=bg_peach_color, borderwidth=0)
     canvas.pack()
